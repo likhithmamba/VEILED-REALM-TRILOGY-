@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Veiled Realm</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              void: '#050505',
+              crimson: '#8a1c1c',
+              gold: '#d4af37',
+              shadow: '#2d1b4e',
+              mist: '#a8b2d1',
+            },
+            fontFamily: {
+              cinzel: ['Cinzel', 'serif'],
+              montserrat: ['Montserrat', 'sans-serif'],
+            },
+            backgroundImage: {
+              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+              'void-gradient': 'linear-gradient(to bottom, #050505 0%, #2d1b4e 50%, #050505 100%)',
+              'cosmic-red': 'radial-gradient(circle at center, rgba(138, 28, 28, 0.5) 0%, rgba(45, 27, 78, 0.2) 40%, rgba(5, 5, 5, 1) 80%)',
+            },
+            boxShadow: {
+              'glow': '0 0 20px rgba(138, 28, 28, 0.5)',
+            },
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #050505; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #2d1b4e; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #8a1c1c; 
+      }
+      
+      /* Hide scrollbar for specific elements but keep functionality */
+      .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+      }
+      .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+      }
+
+      /* Shimmer Loading Effect */
+      @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+      }
+      
+      .animate-shimmer {
+        background: #0f0f0f;
+        background-image: linear-gradient(
+          to right,
+          #0f0f0f 0%,
+          #1a1a1a 20%,
+          #0f0f0f 40%,
+          #0f0f0f 100%
+        );
+        background-repeat: no-repeat;
+        background-size: 1000px 100%;
+        animation: shimmer 2s infinite linear forwards;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.555.0"
+  }
+}
+</script>
+</head>
+  <body class="bg-void text-gray-200 antialiased font-montserrat overflow-x-hidden selection:bg-crimson selection:text-white">
+    <div id="root"></div>
+  </body>
+</html>
