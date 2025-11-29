@@ -1,36 +1,20 @@
-# 🌑 VEILED REALM CHRONICLES
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
 
-### **I wrote a trilogy. I built this website. Now, I want you to read it.**
+# Run and deploy your AI Studio app
 
-Welcome to the official repository for **Veiled Realm**, my dark fantasy trilogy about the shattering of memory and the rise of the Shadow.
+This contains everything you need to run your app locally.
 
-I built this interactive experience using **React & Tailwind** to bring the world of the books to life—but the *real* story isn't in the code. It's in the pages.
+View your app in AI Studio: https://ai.studio/apps/drive/1CVKDjLZZ9bcr4X8w0ATdKfVT8oaNnM9D
 
-**If you like dark magic, ancient mysteries, and heroes breaking under the weight of the void, this series is for you.**
+## Run Locally
 
----
+**Prerequisites:**  Node.js
 
-## 📚 GET THE BOOKS
-**Support an independent author and developer. Grab your copy below:**
 
-🔴 **Book I: Threads of the Forgotten**
-> *Where the first memory shatters.*
-> [🛒 **BUY ON AMAZON**](#) *(Replace with your link)*
-
-⚫ **Book II: Echoes of the Abyss**
-> *Silence speaks louder than screams.*
-> [🛒 **PRE-ORDER NOW**](#) *(Replace with your link)*
-
-🟣 **Book III: The Shadow’s Embrace**
-> *The final darkness falls.*
-> [🛒 **PRE-ORDER NOW**](#) *(Replace with your link)*
-
----
-
-## 💻 About This Project
-This repo contains the source code for the landing page you see above. It features:
-* **Cosmic Atmosphere:** A custom "Red Nebula" theme.
-* **Grimoire Mode:** An immersive chapter reader.
-* **Interactive Timeline:** The history of the Epochs.
-
-*Feel free to star the repo ⭐️, but I'd rather you read the book!*
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`

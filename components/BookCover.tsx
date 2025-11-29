@@ -145,11 +145,11 @@ export const BookCover: React.FC<BookCoverProps> = ({ book, className = "" }) =>
 
       {/* Typography Overlay - High Clarity */}
       <div className="absolute top-0 w-full pt-10 pb-4 flex flex-col items-center z-30 pointer-events-none">
-        <h1 className="font-cinzel font-bold text-3xl text-[#d4af37] drop-shadow-[0_2px_0_rgba(0,0,0,1)] tracking-[0.1em] scale-y-90">
+        <h1 className="font-cinzel font-bold text-2xl text-[#d4af37] drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)] tracking-[0.15em] scale-y-90 opacity-95">
           VEILED REALM
         </h1>
         <div className="mt-1 px-4 border-b border-crimson/0 group-hover:border-crimson/80 transition-all duration-700 pb-1">
-          <h2 className="font-cinzel text-gray-200 text-[11px] font-semibold tracking-[0.2em] uppercase text-center drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]">
+          <h2 className="font-cinzel text-gray-200 text-[10px] font-medium tracking-[0.2em] uppercase text-center drop-shadow-md">
             {book.title}
           </h2>
         </div>
