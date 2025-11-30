@@ -22,3 +22,23 @@ export interface Epoch {
   description: string;
   icon?: string;
 }
+
+export interface LoreItem {
+  id: string;
+  term: string;
+  definition: string;
+}
+
+export interface Character {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+}
+
+export interface Download {
+  id: string;
+  title: string;
+  type: string;
+  size: string;
+}
