@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, ChevronUp, Download, Mail, Sparkles, User, Sword, Scroll, BookOpen } from 'lucide-react';
+import { ChevronDown, Download, Mail, User, BookOpen } from 'lucide-react';
 import { BIO_TEXT, BIO_QUOTE, LORE_ITEMS, CHARACTERS, DOWNLOADS } from '../constants';
 
 // Helper Hook for Scroll Animations
@@ -53,38 +53,15 @@ export const AboutSection: React.FC = () => (
 export const LoreSection: React.FC = () => {
   const { elementRef, isVisible } = useScrollObserver();
   const [openId, setOpenId] = useState<string | null>(null);
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (elementRef.current) {
-        const rect = elementRef.current.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          setOffset(window.scrollY * 0.15); 
-        }
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <section ref={elementRef} className="py-32 px-4 bg-[#050505] relative overflow-hidden border-t border-white/5">
-      {/* Parallax Background Layer */}
-      <div 
-        className="absolute inset-0 pointer-events-none opacity-20 transition-transform duration-75 ease-linear will-change-transform"
-        style={{ transform: `translateY(${offset * 0.2}px)` }}
-      >
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-shadow/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-crimson/10 rounded-full blur-[120px]" />
-        
-        {/* Runes */}
-        <div className="absolute top-20 right-[15%] text-[12rem] font-cinzel text-gold select-none opacity-5 rotate-12">Ω</div>
-        <div className="absolute bottom-40 left-[10%] text-[15rem] font-cinzel text-crimson select-none opacity-5 -rotate-12">Σ</div>
+    <section ref={elementRef} className="py-32 px-4 bg-[#050505] relative overflow-hidden border-t border-white/5 flex flex-col items-center">
+      {/* Background Decor */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full bg-gradient-to-b from-void via-shadow/5 to-void opacity-50" />
       </div>
 
-      <div className="max-w-3xl mx-auto relative z-10">
+      <div className="max-w-3xl w-full relative z-10">
         <div className={`text-center mb-16 transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="text-4xl font-cinzel text-gold mb-3 tracking-[0.2em] drop-shadow-md">GLOSSARY OF THE REALM</h2>
           <p className="text-gray-500 font-montserrat text-sm uppercase tracking-widest">Truths the Veil tried to erase</p>
@@ -97,19 +74,19 @@ export const LoreSection: React.FC = () => {
               key={item.id} 
               className={`
                 group relative border bg-[#0a0a0a] transition-all duration-500 transform overflow-hidden
-                ${openId === item.id ? 'border-crimson shadow-[0_0_20px_rgba(138,28,28,0.15)] bg-[#0f0f0f]' : 'border-white/5 hover:border-white/20'}
+                ${openId === item.id ? 'border-crimson/50 shadow-[0_0_20px_rgba(138,28,28,0.15)] bg-[#0f0f0f]' : 'border-white/5 hover:border-gold/30'}
                 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
               `}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              {/* Active Indicator Bar */}
-              <div className={`absolute left-0 top-0 bottom-0 w-1 bg-crimson transition-all duration-300 ${openId === item.id ? 'opacity-100' : 'opacity-0'}`} />
+              {/* Active Glow */}
+              <div className={`absolute inset-0 bg-gradient-to-r from-crimson/5 to-transparent transition-opacity duration-500 pointer-events-none ${openId === item.id ? 'opacity-100' : 'opacity-0'}`} />
 
               <button
                 onClick={() => setOpenId(openId === item.id ? null : item.id)}
                 className="w-full flex items-center justify-between p-6 text-left relative z-10"
               >
-                <span className={`text-lg font-cinzel tracking-wide transition-colors duration-300 ${openId === item.id ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
+                <span className={`text-lg font-cinzel tracking-wide transition-colors duration-300 ${openId === item.id ? 'text-gold' : 'text-gray-300 group-hover:text-white'}`}>
                   {item.term}
                 </span>
                 <span className={`transition-transform duration-500 ${openId === item.id ? 'rotate-180 text-crimson' : 'text-gray-600 group-hover:text-gold'}`}>
@@ -167,36 +144,54 @@ export const CharacterSection: React.FC = () => {
 };
 
 // 7. THE VAULT (Downloads)
-export const VaultSection: React.FC = () => {
+interface VaultSectionProps {
+  onOpenStarterPack?: () => void;
+}
+
+export const VaultSection: React.FC<VaultSectionProps> = ({ onOpenStarterPack }) => {
   const { elementRef, isVisible } = useScrollObserver();
 
   return (
-    <section ref={elementRef} className="py-24 px-4 bg-gradient-to-b from-void to-[#0a0a0a]">
+    <section ref={elementRef} className="py-32 px-4 bg-gradient-to-b from-void to-[#0a0a0a] border-t border-white/5">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className={`text-3xl font-cinzel text-gold mb-12 tracking-[0.2em] transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <h2 className={`text-4xl font-cinzel text-gold mb-4 tracking-[0.2em] transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           THE ARCHIVE
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <p className="text-gray-500 mb-16 uppercase tracking-widest text-xs">Knowledge is the only currency here</p>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {DOWNLOADS.map((item, index) => (
             <div 
               key={item.id} 
-              className={`border border-gray-800 p-8 flex flex-col items-center hover:bg-gray-900/30 transition-all duration-700 group transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+              className={`
+                relative border border-gray-800 p-10 flex flex-col items-center bg-[#080808] hover:bg-[#0c0c0c] transition-all duration-500 group transform 
+                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
+                hover:border-gold/30 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)]
+              `}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <Download className="w-8 h-8 text-gray-600 mb-4 group-hover:text-crimson group-hover:animate-bounce" />
-              <h4 className="text-white font-cinzel mb-2">{item.title}</h4>
-              <span className="text-xs text-gray-500 font-mono mb-6">{item.type} • {item.size}</span>
-              <button className="px-6 py-2 border border-gray-700 text-xs font-cinzel text-gray-400 hover:text-white hover:border-white transition-all uppercase tracking-widest">
+              <Download className="w-10 h-10 text-gray-700 mb-6 group-hover:text-gold group-hover:animate-bounce transition-colors" />
+              <h4 className="text-white font-cinzel text-xl mb-2">{item.title}</h4>
+              <span className="text-xs text-gray-500 font-mono mb-8 border px-2 py-1 border-gray-800 rounded">{item.type} • {item.size}</span>
+              
+              <button 
+                onClick={item.title.includes('Free Sample') && onOpenStarterPack ? onOpenStarterPack : undefined}
+                className="w-full py-4 border border-gray-800 text-xs font-cinzel text-gray-400 hover:text-white hover:border-gold hover:bg-gold/10 transition-all uppercase tracking-[0.2em] font-bold"
+              >
                 Access File
               </button>
             </div>
           ))}
         </div>
-        <div className={`mt-16 transition-all duration-1000 delay-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <button className="px-10 py-4 bg-gold text-black font-cinzel font-bold tracking-widest hover:bg-white transition-colors animate-pulse-slow">
+        
+        <div className={`mt-20 transition-all duration-1000 delay-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <button 
+            onClick={onOpenStarterPack}
+            className="px-12 py-5 bg-gold text-black font-cinzel font-bold tracking-[0.2em] hover:bg-white transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
+          >
             DOWNLOAD STARTER PACK - FREE
           </button>
-          <p className="mt-4 text-xs text-gray-600 font-montserrat uppercase">No Signup Required • Direct Link</p>
+          <p className="mt-6 text-xs text-gray-600 font-montserrat uppercase tracking-wider">No Signup Required • Direct Link</p>
         </div>
       </div>
     </section>
@@ -231,12 +226,12 @@ export const NewsletterSection: React.FC = () => (
 export const AuthorNoteSection: React.FC = () => (
   <section className="py-24 px-4 bg-void border-t border-gray-900">
     <div className="max-w-3xl mx-auto text-center">
-      <Scroll className="w-8 h-8 text-gray-700 mx-auto mb-6" />
+      <div className="w-12 h-1 bg-gray-800 mx-auto mb-8" />
       <h3 className="text-sm font-cinzel text-gray-500 tracking-[0.3em] uppercase mb-6">Behind The Veil</h3>
       <p className="text-xl md:text-2xl font-serif text-gray-300 leading-relaxed italic">
         "Veiled Realm started as a question: 'What remains when the world insists you don’t exist?' Every story is a fragment of something I refused to forget."
       </p>
-      <div className="mt-8 text-gold font-cinzel text-sm">— Imperial X</div>
+      <div className="mt-8 text-gold font-cinzel text-sm tracking-widest">— Imperial X</div>
     </div>
   </section>
 );

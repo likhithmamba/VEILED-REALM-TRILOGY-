@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Feather, Book, Bookmark, ExternalLink } from 'lucide-react';
+import { X, Feather, Bookmark, ExternalLink } from 'lucide-react';
 import { Book as BookType } from '../types';
 import { BookCover } from './BookCover';
 
@@ -37,13 +37,6 @@ const ContentSkeleton = () => (
        <div className="h-4 rounded animate-shimmer w-10/12" />
        <div className="h-4 rounded animate-shimmer w-full" />
        <div className="h-4 rounded animate-shimmer w-9/12" />
-    </div>
-
-    <div className="space-y-4 pt-4">
-       <div className="h-4 rounded animate-shimmer w-11/12" />
-       <div className="h-4 rounded animate-shimmer w-full" />
-       <div className="h-4 rounded animate-shimmer w-full" />
-       <div className="h-4 rounded animate-shimmer w-4/5" />
     </div>
   </div>
 );
@@ -113,6 +106,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
 
         {/* Left: Cover Side */}
         <div className="hidden md:block w-1/3 max-w-sm relative border-r border-gray-800 bg-void">
+          {/* Fallback to generic cover style if no ID matches 1-3 */}
           <BookCover book={book} className="w-full h-full opacity-90" />
           <div className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
           
@@ -139,7 +133,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
               <span className="text-crimson font-cinzel text-xs tracking-[0.3em] uppercase block mb-1">
                 Grimoire Entry
               </span>
-              <h2 className="text-2xl font-cinzel text-gray-200">
+              <h2 className="text-xl md:text-2xl font-cinzel text-gray-200">
                 {book.subtitle}
               </h2>
             </div>
@@ -153,7 +147,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
           <div className="flex flex-1 overflow-hidden relative">
             
             {/* Chapter Navigation (Sidebar) */}
-            <div className="hidden lg:block w-64 border-r border-gray-800 bg-[#080808] overflow-y-auto custom-scrollbar">
+            <div className="hidden lg:block w-72 border-r border-gray-800 bg-[#080808] overflow-y-auto custom-scrollbar">
               <div className="p-6 sticky top-0 bg-[#080808] z-10 border-b border-gray-900 mb-2">
                 <h4 className="text-gray-500 font-cinzel text-xs uppercase tracking-wider flex items-center gap-2">
                   <Bookmark className="w-3 h-3 text-crimson" /> Table of Contents
@@ -167,9 +161,9 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                     className="w-full text-left p-3 rounded-sm transition-all duration-300 group hover:bg-gray-900 border-l-2 border-transparent hover:border-crimson"
                   >
                     <span className="block text-gray-600 text-[10px] font-cinzel tracking-wider mb-1 group-hover:text-crimson transition-colors">
-                      CHAPTER {idx + 1}
+                      SECTION {idx + 1}
                     </span>
-                    <span className="block text-gray-400 font-montserrat text-sm group-hover:text-gray-100 transition-colors line-clamp-1">
+                    <span className="block text-gray-400 font-montserrat text-xs group-hover:text-gray-100 transition-colors line-clamp-2 leading-tight">
                       {chapter.title}
                     </span>
                   </button>
@@ -185,7 +179,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
               {isLoading ? (
                 <ContentSkeleton />
               ) : (
-                <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-forwards">
+                <div className="max-w-3xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-forwards pb-24">
                   {/* Intro / Excerpt */}
                   <div className="mb-16 p-8 border border-gray-800 bg-gray-900/30 rounded-sm relative overflow-hidden">
                      <div className="absolute top-0 left-0 w-1 h-full bg-crimson" />
@@ -198,16 +192,16 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                   {/* Dynamic Chapters */}
                   <div className="space-y-24">
                     {book.chapters.map((chapter, idx) => (
-                      <div key={chapter.id} id={chapter.id} className="scroll-mt-24 relative">
+                      <div key={chapter.id} id={chapter.id} className="scroll-mt-32 relative">
                         {/* Chapter Header */}
                         <div className="flex flex-col items-center text-center mb-10">
                           <span className="text-6xl font-cinzel text-gray-800/50 font-bold absolute -top-10 select-none">
                             {idx + 1}
                           </span>
                           <span className="text-crimson text-xs font-cinzel tracking-[0.4em] uppercase mb-3 relative z-10 bg-void px-4">
-                            Chapter {idx + 1}
+                            Section {idx + 1}
                           </span>
-                          <h3 className="text-3xl md:text-4xl font-cinzel text-gold relative z-10">
+                          <h3 className="text-2xl md:text-3xl font-cinzel text-gold relative z-10 max-w-lg leading-tight">
                             {chapter.title}
                           </h3>
                           <div className="w-24 h-[1px] bg-gray-800 mt-6" />
@@ -240,7 +234,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
           <div className="p-6 border-t border-gray-800 bg-[#050505] z-30 flex items-center justify-between shrink-0 shadow-[0_-10px_40px_rgba(0,0,0,0.8)]">
              <div className="hidden md:flex flex-col">
                <span className="text-xs font-cinzel text-gold tracking-widest uppercase">The Collection</span>
-               <span className="text-[10px] font-montserrat text-gray-500">Available worldwide in Hardcover & Digital</span>
+               <span className="text-[10px] font-montserrat text-gray-500">Support the Author</span>
              </div>
              <a 
                href={book.buyUrl || "#"} 
@@ -249,7 +243,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                className="group relative px-8 py-3 bg-transparent border border-crimson/30 text-crimson font-cinzel font-bold text-sm tracking-[0.2em] hover:bg-crimson hover:text-white transition-all duration-500 ease-out flex items-center gap-3 overflow-hidden rounded-sm w-full md:w-auto justify-center shadow-[0_0_20px_rgba(138,28,28,0.1)] hover:shadow-[0_0_30px_rgba(138,28,28,0.4)]"
              >
                <span className="relative z-10 flex items-center gap-2">
-                 ACQUIRE TOME <ExternalLink className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
+                 ACQUIRE FULL VERSION <ExternalLink className="w-3 h-3 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform duration-300" />
                </span>
                <div className="absolute inset-0 w-full h-full bg-crimson transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out -z-0" />
              </a>

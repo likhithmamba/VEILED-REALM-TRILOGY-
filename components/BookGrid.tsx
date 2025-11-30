@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen, ShoppingBag } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 import { BOOKS } from '../constants';
 import { Book } from '../types';
 import { BookCover } from './BookCover';
@@ -46,34 +46,46 @@ export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
         >
           {/* 3D Card Container */}
           <div 
-            className="relative w-full aspect-[2/3] max-w-[350px] mb-8 cursor-pointer transform transition-all duration-500 ease-out group-hover:-translate-y-6 group-hover:scale-105 group-hover:shadow-crimson rounded-sm overflow-hidden border border-gray-900 bg-[#0a0a0a]"
+            className="relative w-full aspect-[2/3] max-w-[350px] mb-8 cursor-pointer transform transition-all duration-500 ease-out group-hover:-translate-y-4 group-hover:scale-[1.02] group-hover:shadow-[0_0_40px_rgba(138,28,28,0.4)] rounded-sm overflow-hidden border border-gray-800 hover:border-crimson/50 bg-[#0a0a0a]"
             onClick={() => onBookSelect(book)}
           >
             {/* Custom Book Cover Component */}
             <BookCover book={book} className="w-full h-full" />
             
             {/* Interaction Overlay */}
-            <div className="absolute inset-0 bg-void/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-8 text-center backdrop-blur-[2px] z-50">
+            <div className="absolute inset-0 bg-void/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-8 text-center backdrop-blur-[2px] z-50">
               
               <button 
-                className="mb-6 px-6 py-3 border border-gold text-gold font-cinzel tracking-widest text-sm hover:bg-gold hover:text-black transition-colors duration-300 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-100"
+                className="mb-6 px-8 py-3 border border-gold text-gold font-cinzel tracking-widest text-sm hover:bg-gold hover:text-black transition-colors duration-300 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-100 font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)]"
               >
                  <BookOpen className="w-4 h-4" /> READ SAMPLE
               </button>
 
-              <p className="text-gray-300 font-montserrat text-xs italic translate-y-4 group-hover:translate-y-0 transition-transform delay-150 max-w-[80%]">
-                "{book.excerpt.substring(0, 80)}..."
+              <p className="text-gray-100 font-montserrat text-sm italic translate-y-4 group-hover:translate-y-0 transition-transform delay-150 max-w-[90%] leading-relaxed text-shadow-sm">
+                "{book.excerpt.substring(0, 100)}..."
               </p>
             </div>
           </div>
 
           {/* Title Below */}
-          <h3 className="text-xl font-cinzel text-gray-200 mt-2 text-center group-hover:text-crimson transition-colors duration-300">
-            {book.title}
-          </h3>
-          <span className="text-xs font-montserrat text-gold tracking-widest uppercase mt-1">
-            {book.subtitle}
-          </span>
+          <div className="text-center w-full">
+            <h3 className="text-2xl font-cinzel text-white mt-2 group-hover:text-gold transition-colors duration-300 tracking-wide drop-shadow-md">
+              {book.title}
+            </h3>
+            <span className="text-xs font-montserrat text-crimson tracking-[0.2em] uppercase mt-2 block font-bold">
+              {book.subtitle}
+            </span>
+            <p className="text-sm text-gray-300 mt-4 leading-7 font-montserrat opacity-90 px-2">
+              {book.description}
+            </p>
+            
+            <button 
+              onClick={() => onBookSelect(book)}
+              className="mt-6 w-full py-3 border border-gray-700 text-gray-400 uppercase tracking-[0.15em] text-xs hover:border-gold hover:text-white transition-all duration-300"
+            >
+              Read Excerpt
+            </button>
+          </div>
         </div>
       ))}
     </div>
