@@ -26,6 +26,8 @@
             fontFamily: {
               cinzel: ['Cinzel', 'serif'],
               montserrat: ['Montserrat', 'sans-serif'],
+              fantasy: ['Cinzel', 'serif'],
+              body: ['Montserrat', 'sans-serif'],
             },
             backgroundImage: {
               'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -48,12 +50,38 @@
               'fade-in-up': {
                 '0%': { opacity: '0', transform: 'translateY(20px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'nebula-drift': {
+                '0%': { backgroundPosition: '0% 50%' },
+                '50%': { backgroundPosition: '100% 50%' },
+                '100%': { backgroundPosition: '0% 50%' },
+              },
+              'glitch': {
+                '0%': { transform: 'translate(0)' },
+                '20%': { transform: 'translate(-2px, 2px)' },
+                '40%': { transform: 'translate(-2px, -2px)' },
+                '60%': { transform: 'translate(2px, 2px)' },
+                '80%': { transform: 'translate(2px, -2px)' },
+                '100%': { transform: 'translate(0)' },
+              },
+              'spin-slow': {
+                '0%': { transform: 'rotate(0deg)' },
+                '100%': { transform: 'rotate(360deg)' },
+              },
+              'magma-flow': {
+                '0%': { filter: 'hue-rotate(0deg) brightness(1)' },
+                '50%': { filter: 'hue-rotate(-10deg) brightness(1.2)' },
+                '100%': { filter: 'hue-rotate(0deg) brightness(1)' },
               }
             },
             animation: {
               float: 'float 6s ease-in-out infinite',
               'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
               'fade-in-up': 'fade-in-up 1s ease-out forwards',
+              'nebula': 'nebula-drift 20s ease infinite',
+              'glitch': 'glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite',
+              'spin-slow': 'spin-slow 20s linear infinite',
+              'magma': 'magma-flow 4s ease-in-out infinite',
             }
           }
         }

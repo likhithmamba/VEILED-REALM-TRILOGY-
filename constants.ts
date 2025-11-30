@@ -7,42 +7,42 @@ export const BOOKS: Book[] = [
     id: 1,
     title: "Threads of the Forgotten",
     subtitle: "Book I",
-    description: "An ancient pact is broken. As the veil thins, a lone weaver discovers that reality is merely a tapestry of lies waiting to be unraveled.",
+    description: "Every world ends twice — first in memory, then in belief. A boy with eyes that saw too far, and a girl who remembered what no one dared to.",
     coverUrl: "https://picsum.photos/400/600?grayscale&blur=2",
-    excerpt: "The needle felt heavy in her hand, heavier than steel should. It wasn't just metal; it was a conduit. When she pierced the fabric, she didn't just mend a tear—she saw the void beyond.",
+    excerpt: "\"Every world ends twice — first in memory, then in belief.\" Before the silence took root. Before the Voice began curating truth. Before the Council traded fear for obedience… there was a boy with eyes that saw too far. Aiden Valcrest wasn’t born a savior. He was born a quiet, grieving student until her death cracked open something ancient inside him: The Dreadful Eye. He didn't become a god. He became a mirror.",
     buyUrl: "https://example.com/book1",
     chapters: [
-      { id: "c1", title: "The Weaver's Knot", content: "The needle felt heavy in her hand, heavier than steel should. " + LOREM_TEXT },
-      { id: "c2", title: "Whispers in Silk", content: "Silk should not scream. That was the first lesson Elara learned when the Loom accepted her blood offering. " + LOREM_TEXT },
-      { id: "c3", title: "The Unraveling", content: "They came at night, shifting through the door cracks like smoke. " + LOREM_TEXT }
+      { id: "c1", title: "Prologue: The World Before the Rewrite", content: "\"Every world ends twice — first in memory, then in belief.\" Before the silence took root. Before the Voice began curating truth. Before the Council traded fear for obedience… there was a boy with eyes that saw too far. Aiden Valcrest wasn’t born a savior. He was born a quiet, grieving student until her death cracked open something ancient inside him: The Dreadful Eye. He didn't become a god. He became a mirror." },
+      { id: "c2", title: "Veiled Awakening", content: "The shrill, synthetic chirp of his smart ceiling pierced the early silence. Aiden Cross groaned, kicking off a tangled blanket of hoodie, cables, and solder-burned jeans. His room looked like a battlefield between a RadioShack and a startup accelerator." },
+      { id: "c3", title: "Council in Twilight", content: "Beneath a mountain, hidden behind holographic disguises and cloaked by thirteen layers of illusion, the Council of the White Accord assembled in a vaulted crystal dome." }
     ]
   },
   {
     id: 2,
     title: "Echoes of the Eclipsed Oath",
     subtitle: "Book II",
-    description: "Driven into the darkness, the survivors must navigate a realm where sound creates reality and silence brings death.",
+    description: "The world had forgotten how to dream. Verdant, a city built on prayer-coded technology, begins to glitch as a forbidden memory reawakens.",
     coverUrl: "https://picsum.photos/401/601?grayscale&blur=2",
-    excerpt: "Silence was not empty here. It was a predator. Kaelen held his breath, his heartbeat thundering like a war drum in his own ears. The Abyss did not tolerate noise.",
+    excerpt: "Cycle Year 312 After The Rewrite. The world had forgotten how to dream. Every night the Halo Witness shone above the clouds like a silver pupil—silent, perfect, unblinking. Inside Vault 07, Elias Kaer watched memories being harvested. Rows of sleepers floated in translucent capsules. A single entry blinked red among the blue archives: “Valcrest, Aiden — Prohibited Classification: EYE.”",
     buyUrl: "https://example.com/book2",
     chapters: [
-      { id: "c1", title: "The Sound of Fear", content: "Silence was not empty here. It was a predator. Kaelen held his breath. " + LOREM_TEXT },
-      { id: "c2", title: "Resonance", content: "Every vibration carried a message. The ground hummed with the history of the fallen. " + LOREM_TEXT },
-      { id: "c3", title: "Shattered Glass", content: "The obsidian plains stretched endlessly, reflecting a sky that had no stars. " + LOREM_TEXT }
+      { id: "c1", title: "Prologue: The Memory That Never Was", content: "Cycle Year 312 After The Rewrite. The world had forgotten how to dream. Every night the Halo Witness shone above the clouds like a silver pupil—silent, perfect, unblinking. Inside Vault 07, Elias Kaer watched memories being harvested." },
+      { id: "c2", title: "The Archivist of Dreams", content: "Morning in Verdant was a hymn sung by machines. Choral drones drifted between spires, broadcasting affirmations through mist that smelled faintly of citrus and copper." },
+      { id: "c3", title: "The Girl Who Remembers Tomorrow", content: "The lower city dreamed in rust instead of gold. Steam hissed from the prayer vents, mixing incense with machine oil. Among the narrow alleys a girl crouched beside a cracked vending drone." }
     ]
   },
   {
     id: 3,
-    title: "The Dawn No One Predicted",
+    title: "The Eclipsed Oath",
     subtitle: "Book III",
-    description: "The final convergence. Light and Dark collide as the entity behind the veil reveals its true face.",
+    description: "The sky broke before Kael heard it scream. The Veil has fallen. A story of rebellion, of love sharpened into a weapon, and of worlds rebuilt by choice.",
     coverUrl: "https://picsum.photos/402/602?grayscale&blur=2",
-    excerpt: "It ended where it began: in the absolute dark. The Shadow did not fight with swords or spells; it fought with truth. The terrible, maddening truth that the light they had worshiped was merely the Shadow's reflection.",
+    excerpt: "The sky broke before Kael heard it scream. It began with a tremor—subtle as breath, yet unmistakable. The twin moons hovered unnaturally still. Then the world convulsed. Aetherion’s horizon twisted in silence. Kael staggered through the obsidian dust. He did not remember when he last slept. But he remembered this: The Veil had fallen.",
     buyUrl: "https://example.com/book3",
     chapters: [
-      { id: "c1", title: "Absolute Dark", content: "It ended where it began: in the absolute dark. The Shadow did not fight with swords or spells. " + LOREM_TEXT },
-      { id: "c2", title: "Eclipse", content: "The sun turned black, a hole in the fabric of the sky. " + LOREM_TEXT },
-      { id: "c3", title: "Crimson Tears", content: "Blood rain fell, warm and metallic, staining the white stone of the sanctuary. " + LOREM_TEXT }
+      { id: "c1", title: "The Fracture Beneath Heaven", content: "The sky broke before Kael heard it scream. It began with a tremor—subtle as breath, yet unmistakable. The twin moons hovered unnaturally still. Then the world convulsed." },
+      { id: "c2", title: "Ember and Echo", content: "The storm had retreated, but the world still hissed where the molten rain had kissed the stone. Glass puddles cooled into black mirrors." },
+      { id: "c3", title: "The Ashen Citadel", content: "Dawn rose without color. The horizon glowed faintly—but not with sunlight. The pale ring of the moon-eclipse cast a gray radiance over the land." }
     ]
   }
 ];
@@ -50,54 +50,54 @@ export const BOOKS: Book[] = [
 export const TIMELINE_EPOCHS: Epoch[] = [
   {
     id: 1,
-    title: "Dawnfire",
+    title: "The Rewrite",
     year: "Age I",
-    description: "The world is born in flames. Gods walk among mortals, but their gifts come with a terrible price."
+    description: "The world ends in memory. The Voice begins curating truth, and the silence takes root."
   },
   {
     id: 2,
-    title: "Silence",
+    title: "Age of Reverence",
     year: "Age II",
-    description: "The gods retreat, leaving behind only echoes. Magic becomes scarce, and memory begins to fade."
+    description: "A world built on belief. Citizens pray to the Halo Witness, forgetting the chaos of the past."
   },
   {
     id: 3,
-    title: "Shattered Age",
+    title: "The Fracture",
     year: "Age III",
-    description: "The Great Division. The Veil is constructed, separating the waking world from the Void."
+    description: "The sky breaks. The Veil falls. Kael awakens, and the Dreadful Eye opens once more."
   },
   {
     id: 4,
-    title: "Threaded Age",
+    title: "The Memory War",
     year: "Age IV",
-    description: "The weavers rise. Reality is stitched together to hide the cracks in the sky."
+    description: "Faith becomes a battlefield. Believers of peace clash with Keepers of Truth."
   },
   {
     id: 5,
-    title: "Eclipse Age",
+    title: "Eclipsed Dawn",
     year: "Current Era",
-    description: "The Veil thins. The Forgotten return. The cycle nears its violent conclusion."
+    description: "Centuries later. 'We are not who we remember. We are who remembers us.'"
   }
 ];
 
 export const LORE_ITEMS: LoreItem[] = [
-  { id: 'l1', term: 'The Veil', definition: 'A metaphysical barrier separating the material plane from the Void. It consumes the memories of those who touch it.' },
-  { id: 'l2', term: 'The Oath', definition: 'The forbidden pact made by the First Weaver to bind the shadows. The price was their name.' },
-  { id: 'l3', term: 'The Eclipser', definition: 'An entity that does not exist in time. It is the silence between heartbeats.' },
-  { id: 'l4', term: 'The Shard of Eidryn', definition: 'A fragment of a dead star, capable of piercing the Veil but driving the wielder to madness.' },
+  { id: 'l1', term: 'The Veil', definition: 'A membrane between truth and memory. Once stable, now fractured, leaking forgotten realities.' },
+  { id: 'l2', term: 'The Oath', definition: 'A sentient system binding all creation—now waking, remembering, rewriting.' },
+  { id: 'l3', term: 'The Eclipser', definition: 'A primordial entity older than the gods. Crowned in shadow. A destroyer of memory and author of endings.' },
+  { id: 'l4', term: 'Riftborn', definition: 'Creatures birthed from forgotten truths and fractured timelines. Half thought, half reflection.' },
+  { id: 'l5', term: 'Mirrorseed', definition: 'Not born of Earth. A witness left behind to observe the fall of every thread. When too many lies accumulate, it blooms.' },
 ];
 
 export const CHARACTERS: Character[] = [
-  { id: 'ch1', name: 'Kael Vevran', role: 'The Weaver', quote: "I stitch the world together, but I am coming apart at the seams." },
-  { id: 'ch2', name: 'Lyra', role: 'The Memory Thief', quote: "Your past is heavy. Let me carry it for a price." },
-  { id: 'ch3', name: 'Eryndor', role: 'The Last Sentinel', quote: "Duty is just a cage we build for ourselves." },
-  { id: 'ch4', name: 'The Eclipser', role: 'Antagonist', quote: "Light is a lie told by a dying sun." },
+  { id: 'ch1', name: 'Kael Vevryn', role: 'The Marked', quote: "Once erased from existence. Now marked by the Oath. Wields Veydran. Holds memories the universe tried to forget." },
+  { id: 'ch2', name: 'Lyra / Lyris', role: 'The Witness', quote: "The First Witness reborn. Host of the Shard of Eidryn. Split between who she was and who the Oath needs her to become." },
+  { id: 'ch3', name: 'Nyra', role: 'The Shadow', quote: "Kael’s shadow and his unchosen consequence. A fragment of the Veil given hunger and thought." },
+  { id: 'ch4', name: 'Eryndor', role: 'The Architect', quote: "Kael’s former mentor—half flesh, half shadow. Bound to the Oath’s awakening." },
 ];
 
 export const DOWNLOADS: Download[] = [
   { id: 'd1', title: 'Free Sample eBook', type: 'PDF', size: '2.4 MB' },
-  { id: 'd2', title: 'Wallpaper Pack', type: 'ZIP', size: '150 MB' },
-  { id: 'd3', title: 'Realm Map', type: 'JPG', size: '8.1 MB' },
+  { id: 'd2', title: 'Symbol Pack', type: 'ZIP', size: '8.5 MB' },
 ];
 
 export const BIO_TEXT = "ImperialX crafts worlds where memory is weapon and silence is survival. His writing blends epic scale with emotional weight. Off the page, he studies myth structures and dream logic.";
