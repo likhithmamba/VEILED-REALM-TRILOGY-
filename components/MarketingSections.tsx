@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Download, Mail, User, BookOpen, Database, FileText, Lock } from 'lucide-react';
+import { ChevronDown, Download, Mail, User, BookOpen, Database, FileText, Lock, Sparkles, Zap } from 'lucide-react';
 import { BIO_TEXT, BIO_QUOTE, LORE_ITEMS, CHARACTERS, DOWNLOADS } from '../constants';
 
 // Helper Hook for Scroll Animations
@@ -143,7 +144,7 @@ export const CharacterSection: React.FC = () => {
   );
 };
 
-// 7. THE ARCHIVE (Vault Redesign)
+// 7. THE ARCHIVE (Vault Redesign - Premium Upgrade)
 interface VaultSectionProps {
   onOpenStarterPack?: () => void;
 }
@@ -153,88 +154,123 @@ export const VaultSection: React.FC<VaultSectionProps> = ({ onOpenStarterPack })
 
   return (
     <section ref={elementRef} className="relative py-40 px-6 bg-[#030005] overflow-hidden border-t border-white/5">
-      {/* Background Decor */}
-      <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #2d1b4e 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
-      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#050505] via-transparent to-[#050505] z-0" />
+      {/* Dynamic Lighting Background */}
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_20%_20%,_rgba(45,27,78,0.15)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_80%_80%,_rgba(138,28,28,0.1)_0%,_transparent_50%)]" />
+      <div className="absolute inset-0 z-0 opacity-[0.03]" style={{ backgroundImage: 'linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px)', backgroundSize: '50px 50px' }} />
       
       <div className="max-w-7xl mx-auto relative z-10">
         
         {/* Header */}
         <div className={`flex flex-col items-center mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
-           <span className="text-crimson/80 font-mono text-xs tracking-widest mb-4 border border-crimson/30 px-3 py-1 rounded-full">SECURE CONNECTION ESTABLISHED</span>
-           <h2 className="text-5xl md:text-6xl font-cinzel text-white mb-4 tracking-[0.1em] text-shadow-glow">THE ARCHIVE</h2>
-           <p className="text-gray-500 uppercase tracking-[0.3em] text-sm">Artifacts for the initiated</p>
+           <div className="flex items-center gap-3 mb-4">
+             <div className="h-[1px] w-8 bg-crimson" />
+             <span className="text-crimson font-mono text-xs tracking-[0.2em] font-bold">SECURE CONNECTION ESTABLISHED</span>
+             <div className="h-[1px] w-8 bg-crimson" />
+           </div>
+           <h2 className="text-5xl md:text-7xl font-cinzel text-white mb-6 tracking-[0.1em] drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">THE ARCHIVE</h2>
+           <p className="text-gray-400 uppercase tracking-[0.3em] text-xs md:text-sm">Knowledge is the first weapon</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           
-          {/* Left: Artifact Visual */}
+          {/* Left: Artifact Visual - Holographic Projector */}
           <div className={`relative order-2 lg:order-1 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
-             <div className="relative aspect-square max-w-md mx-auto">
-                <div className="absolute inset-0 bg-gradient-radial from-crimson/20 to-transparent blur-3xl animate-pulse-slow" />
+             <div className="relative aspect-square max-w-md mx-auto perspective-1000">
+                {/* Core Glow */}
+                <div className="absolute inset-0 bg-gold/5 blur-[100px] rounded-full animate-pulse-slow" />
                 
-                {/* 3D Floating Elements Simulation */}
-                <div className="relative z-10 w-full h-full border border-gray-800 bg-black/50 backdrop-blur-sm p-8 flex flex-col items-center justify-center text-center shadow-[0_0_50px_rgba(0,0,0,0.8)] border-t-gold/20">
-                   <Database className="w-24 h-24 text-gold mb-8 opacity-80 animate-float" />
-                   <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mb-8" />
-                   <div className="grid grid-cols-2 gap-4 w-full">
-                      <div className="p-4 border border-gray-800 bg-black/40">
-                         <FileText className="w-6 h-6 text-crimson mb-2 mx-auto" />
-                         <div className="text-[10px] text-gray-500 font-mono">STARTER_PACK.PDF</div>
+                {/* Rotating Rings */}
+                <div className="absolute inset-0 border border-gold/10 rounded-full animate-spin-slow" style={{ animationDuration: '30s' }} />
+                <div className="absolute inset-8 border border-dashed border-crimson/20 rounded-full animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '20s' }} />
+                <div className="absolute inset-16 border border-white/5 rounded-full animate-pulse" />
+
+                {/* Central Datapad */}
+                <div className="absolute inset-12 bg-gradient-to-br from-[#1a1a1a] to-black border border-white/10 rounded-sm flex flex-col items-center justify-center shadow-2xl backdrop-blur-xl group hover:border-gold/30 transition-colors duration-500">
+                   <div className="relative mb-6">
+                      <div className="absolute inset-0 bg-gold blur-2xl opacity-20" />
+                      <Database className="w-20 h-20 text-gold relative z-10 opacity-90 group-hover:scale-110 transition-transform duration-500" />
+                   </div>
+                   
+                   <div className="w-2/3 h-[1px] bg-gradient-to-r from-transparent via-white/20 to-transparent mb-6" />
+                   
+                   <div className="space-y-3 w-full px-8">
+                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 bg-white/5 p-2 rounded border border-white/5">
+                         <span className="flex items-center gap-2"><Zap className="w-3 h-3 text-gold" /> STATUS</span>
+                         <span className="text-green-500">ONLINE</span>
                       </div>
-                      <div className="p-4 border border-gray-800 bg-black/40">
-                         <Lock className="w-6 h-6 text-gray-600 mb-2 mx-auto" />
-                         <div className="text-[10px] text-gray-600 font-mono">FULL_TOMES_LOCKED</div>
+                      <div className="flex items-center justify-between text-[10px] font-mono text-gray-500 bg-white/5 p-2 rounded border border-white/5">
+                         <span className="flex items-center gap-2"><Lock className="w-3 h-3 text-crimson" /> ENCRYPTION</span>
+                         <span>AES-4096</span>
                       </div>
                    </div>
                 </div>
-                
-                {/* Decorative Rings */}
-                <div className="absolute inset-[-20px] border border-gray-800 rounded-full opacity-20 animate-spin-slow" style={{ animationDuration: '60s' }} />
-                <div className="absolute inset-[-60px] border border-dashed border-crimson/20 rounded-full opacity-20 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '40s' }} />
              </div>
           </div>
 
-          {/* Right: Actions */}
-          <div className={`order-1 lg:order-2 space-y-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
+          {/* Right: Premium Downloads */}
+          <div className={`order-1 lg:order-2 space-y-10 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
              
-             {/* Starter Pack Hero Card */}
-             <div className="relative group cursor-pointer" onClick={onOpenStarterPack}>
-                <div className="absolute inset-0 bg-gold/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="relative bg-[#0a0a0a] border border-gold/30 p-8 md:p-12 hover:border-gold transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.05)] hover:shadow-[0_0_50px_rgba(212,175,55,0.15)]">
-                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
+             {/* Primary Card: Starter Pack */}
+             <div 
+                className="relative group cursor-pointer" 
+                onClick={onOpenStarterPack}
+             >
+                {/* Hover Glow Effect */}
+                <div className="absolute -inset-1 bg-gradient-to-r from-gold/20 via-crimson/20 to-gold/20 rounded-lg blur opacity-0 group-hover:opacity-70 transition duration-700" />
+                
+                <div className="relative bg-[#080808] border border-white/10 p-10 md:p-12 overflow-hidden rounded-sm transition-all duration-500 group-hover:border-gold/40 group-hover:shadow-[0_0_50px_rgba(212,175,55,0.1)]">
                    
-                   <div className="flex justify-between items-start mb-6">
-                      <h3 className="text-3xl font-cinzel text-white group-hover:text-gold transition-colors">STARTER PACK</h3>
-                      <Download className="w-8 h-8 text-gray-600 group-hover:text-gold transition-colors" />
-                   </div>
-                   
-                   <p className="text-gray-400 font-montserrat text-lg leading-relaxed mb-8">
-                      Access the prohibited archives. Contains the Prologue and first 5 Chapters of all three books. 
-                      <span className="text-crimson block mt-2 font-bold">WARNING: Contains Truth.</span>
-                   </p>
+                   {/* Scanning Line Animation */}
+                   <div className="absolute top-0 left-0 w-full h-[2px] bg-gold/50 shadow-[0_0_15px_#d4af37] opacity-0 group-hover:opacity-100 animate-[scan_2s_linear_infinite]" />
 
-                   <div className="flex items-center gap-4 text-xs font-mono text-gray-500 mb-8">
-                      <span className="border border-gray-800 px-2 py-1">PDF FORMAT</span>
-                      <span className="border border-gray-800 px-2 py-1">2.4 MB</span>
-                      <span className="text-green-500">● AVAILABLE</span>
+                   <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-30 transition-opacity">
+                      <BookOpen size={100} />
                    </div>
 
-                   <button className="w-full py-5 bg-gold text-black font-cinzel font-bold tracking-[0.2em] hover:bg-white transition-colors flex items-center justify-center gap-3">
-                      INITIATE DOWNLOAD <ChevronDown className="w-4 h-4" />
-                   </button>
+                   <div className="relative z-10">
+                      <div className="flex justify-between items-start mb-6">
+                         <div>
+                            <span className="text-crimson font-mono text-[10px] tracking-widest mb-2 block">RECOMMENDED ENTRY POINT</span>
+                            <h3 className="text-3xl md:text-4xl font-cinzel text-white group-hover:text-gold transition-colors text-shadow-sm">STARTER PACK</h3>
+                         </div>
+                      </div>
+                      
+                      <p className="text-gray-400 font-montserrat text-lg leading-relaxed mb-8 max-w-lg">
+                         The first step into the Veiled Realm. Contains the full Prologues and first 5 Chapters of all three books.
+                      </p>
+
+                      <div className="flex flex-wrap gap-3 mb-10">
+                         <span className="text-xs font-mono border border-white/10 px-3 py-1 text-gray-400 bg-white/5 rounded">PDF v1.4</span>
+                         <span className="text-xs font-mono border border-white/10 px-3 py-1 text-gray-400 bg-white/5 rounded">2.4 MB</span>
+                         <span className="text-xs font-mono border border-crimson/30 px-3 py-1 text-crimson bg-crimson/5 rounded flex items-center gap-2">
+                            <Sparkles className="w-3 h-3" /> EXCLUSIVE CONTENT
+                         </span>
+                      </div>
+
+                      <button className="w-full relative overflow-hidden group/btn bg-gradient-to-r from-[#d4af37] via-[#f3d97f] to-[#d4af37] text-black font-cinzel font-bold tracking-[0.2em] py-5 rounded-sm shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300">
+                         <span className="relative z-10 flex items-center justify-center gap-3">
+                            INITIATE DOWNLOAD <Download className="w-5 h-5" />
+                         </span>
+                         <div className="absolute inset-0 bg-white/30 translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+                      </button>
+                   </div>
                 </div>
              </div>
 
-             {/* Secondary Downloads */}
+             {/* Secondary Card: Assets */}
              <div className="grid grid-cols-2 gap-4">
                 {DOWNLOADS.filter(d => !d.title.includes('Free Sample')).map(item => (
-                   <div key={item.id} className="border border-gray-800 p-6 bg-black hover:bg-gray-900 transition-colors group">
-                      <div className="flex items-center justify-between mb-2">
-                         <span className="text-gray-400 font-cinzel text-sm group-hover:text-white">{item.title}</span>
-                         <Download className="w-4 h-4 text-gray-700 group-hover:text-crimson transition-colors" />
+                   <div key={item.id} className="border border-white/5 p-6 bg-white/[0.02] hover:bg-white/[0.05] transition-colors group rounded-sm hover:border-crimson/30">
+                      <div className="flex items-center justify-between mb-3">
+                         <span className="text-gray-300 font-cinzel text-sm group-hover:text-white transition-colors">{item.title}</span>
+                         <Download className="w-4 h-4 text-gray-600 group-hover:text-crimson transition-colors" />
                       </div>
-                      <div className="text-[10px] text-gray-600 font-mono">{item.size}</div>
+                      <div className="w-full h-[1px] bg-white/5 mb-3" />
+                      <div className="flex justify-between items-center text-[10px] text-gray-500 font-mono">
+                         <span>{item.type}</span>
+                         <span>{item.size}</span>
+                      </div>
                    </div>
                 ))}
              </div>

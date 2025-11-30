@@ -78,13 +78,6 @@ export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
             <p className="text-sm text-gray-300 mt-4 leading-7 font-montserrat opacity-90 px-2">
               {book.description}
             </p>
-            
-            <button 
-              onClick={() => onBookSelect(book)}
-              className="mt-6 w-full py-3 border border-gray-700 text-gray-400 uppercase tracking-[0.15em] text-xs hover:border-gold hover:text-white transition-all duration-300"
-            >
-              Read Excerpt
-            </button>
           </div>
         </div>
       ))}

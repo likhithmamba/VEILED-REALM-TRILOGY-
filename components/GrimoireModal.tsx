@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Feather, Bookmark, ExternalLink, BookOpen, ChevronRight } from 'lucide-react';
+import { X, Feather, Bookmark, ExternalLink, BookOpen, ChevronRight, AlignLeft, Share2 } from 'lucide-react';
 import { Book as BookType } from '../types';
-import { BookCover } from './BookCover';
 
 interface GrimoireModalProps {
   book: BookType;
@@ -9,21 +8,26 @@ interface GrimoireModalProps {
 }
 
 const ContentSkeleton = () => (
-  <div className="max-w-3xl mx-auto space-y-12 px-2 opacity-50">
-    <div className="p-8 border border-crimson/20 bg-crimson/5 rounded-sm relative">
-      <div className="absolute top-0 left-0 w-1 h-full bg-crimson" />
-      <div className="h-5 w-5 rounded bg-crimson/20 mb-6" />
-      <div className="space-y-3">
-        <div className="h-3 bg-crimson/10 rounded w-full" />
-        <div className="h-3 bg-crimson/10 rounded w-11/12" />
-        <div className="h-3 bg-crimson/10 rounded w-4/5" />
-      </div>
-    </div>
+  <div className="max-w-2xl mx-auto space-y-8 px-4 opacity-30 mt-20">
+    <div className="h-40 w-full bg-gradient-to-b from-gray-800 to-transparent rounded-sm" />
     <div className="space-y-4">
        <div className="h-4 bg-gray-800 rounded w-full" />
        <div className="h-4 bg-gray-800 rounded w-11/12" />
        <div className="h-4 bg-gray-800 rounded w-full" />
+       <div className="h-4 bg-gray-800 rounded w-3/4" />
     </div>
+  </div>
+);
+
+// Ornamental Divider SVG
+const Divider = () => (
+  <div className="py-12 flex justify-center opacity-40">
+    <svg width="100" height="15" viewBox="0 0 100 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 7.5L45 0H55L50 7.5Z" fill="#d4af37"/>
+      <path d="M0 7.5H40" stroke="#d4af37" strokeWidth="0.5"/>
+      <path d="M60 7.5H100" stroke="#d4af37" strokeWidth="0.5"/>
+      <circle cx="50" cy="7.5" r="1.5" fill="#d4af37"/>
+    </svg>
   </div>
 );
 
@@ -31,10 +35,11 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
   const contentRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [activeChapter, setActiveChapter] = useState<string>("");
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     setIsLoading(true);
-    const timer = setTimeout(() => setIsLoading(false), 800);
+    const timer = setTimeout(() => setIsLoading(false), 600);
     return () => clearTimeout(timer);
   }, [book]);
 
@@ -50,10 +55,19 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
     };
   }, [onClose]);
 
+  // Track scroll progress
+  const handleScroll = () => {
+    if (contentRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
+      const progress = (scrollTop / (scrollHeight - clientHeight)) * 100;
+      setScrollProgress(progress);
+    }
+  };
+
   const scrollToChapter = (chapterId: string) => {
     const element = document.getElementById(chapterId);
     if (element && contentRef.current) {
-      const headerOffset = 120;
+      const headerOffset = 100;
       const elementPosition = element.offsetTop;
       contentRef.current.scrollTo({
         top: elementPosition - headerOffset,
@@ -64,155 +78,201 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 md:p-6 lg:p-12">
-      {/* Backdrop */}
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 overflow-hidden">
+      
+      {/* Immersive Backdrop (Void Gradient) */}
       <div 
-        className="absolute inset-0 bg-[#020005]/95 backdrop-blur-xl transition-opacity duration-500 animate-in fade-in" 
-        onClick={onClose}
+        className="absolute inset-0 bg-[#020003] animate-in fade-in duration-700"
       />
       
-      {/* Modal Container */}
-      <div className="relative w-full h-full max-w-[1600px] bg-[#050000] border border-crimson/30 shadow-[0_0_150px_rgba(138,28,28,0.15)] flex overflow-hidden animate-in zoom-in-95 duration-500 rounded-sm">
-        
-        {/* Close Button */}
-        <button 
-          onClick={onClose}
-          className="absolute top-6 right-6 z-50 text-gray-500 hover:text-white hover:rotate-90 transition-all duration-300"
-        >
-          <X className="w-8 h-8" />
-        </button>
+      {/* Background Ambience (No Grain) */}
+      <div className="absolute inset-0 pointer-events-none">
+         <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-crimson/10 blur-[150px] rounded-full opacity-40" />
+         <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-gold/5 blur-[150px] rounded-full opacity-30" />
+      </div>
 
-        {/* Sidebar (Navigation) */}
-        <div className="hidden lg:flex w-80 flex-col border-r border-crimson/10 bg-black/40 backdrop-blur-md relative z-20">
-          <div className="p-8 border-b border-crimson/10 bg-gradient-to-b from-crimson/5 to-transparent">
-            <span className="text-crimson text-[10px] font-cinzel tracking-[0.3em] uppercase block mb-3">
-              Table of Contents
+      {/* Main Layout Container */}
+      <div className="relative w-full h-full flex flex-col md:flex-row bg-transparent backdrop-blur-sm overflow-hidden">
+        
+        {/* Sidebar - Glass Navigation Rail */}
+        <div className="hidden md:flex w-72 flex-col border-r border-white/5 bg-[#0a0a0a]/40 backdrop-blur-xl relative z-20">
+          <div className="p-8 pb-4">
+            <span className="text-crimson font-cinzel text-[10px] tracking-[0.3em] uppercase block mb-2 opacity-80">
+              Veiled Realm
             </span>
-            <h2 className="text-xl font-cinzel text-white leading-tight">
+            <h1 className="text-xl font-display text-white italic leading-tight">
               {book.title}
-            </h2>
+            </h1>
           </div>
           
-          <div className="flex-1 overflow-y-auto custom-scrollbar p-4 space-y-1">
-            {book.chapters.map((chapter, idx) => (
-              <button
-                key={chapter.id}
-                onClick={() => scrollToChapter(chapter.id)}
-                className={`w-full text-left p-4 rounded-sm transition-all duration-300 group relative border border-transparent ${activeChapter === chapter.id ? 'bg-crimson/10 border-crimson/30' : 'hover:bg-white/5'}`}
-              >
-                <div className="flex items-start gap-3">
-                  <span className={`text-[10px] font-mono mt-1 ${activeChapter === chapter.id ? 'text-crimson' : 'text-gray-600 group-hover:text-gray-400'}`}>
-                    {(idx + 1).toString().padStart(2, '0')}
-                  </span>
-                  <div>
-                    <span className={`block font-cinzel text-xs tracking-wide mb-1 ${activeChapter === chapter.id ? 'text-gold' : 'text-gray-400 group-hover:text-white'}`}>
-                      SECTION {idx + 1}
-                    </span>
-                    <span className={`block font-montserrat text-[11px] leading-tight line-clamp-2 ${activeChapter === chapter.id ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
-                      {chapter.title}
-                    </span>
-                  </div>
-                </div>
-              </button>
-            ))}
+          <div className="flex-1 overflow-y-auto custom-scrollbar px-6 py-4 space-y-6">
+            {/* Table of Contents */}
+            <div className="relative border-l border-white/5 ml-2 pl-6 space-y-1">
+              {book.chapters.map((chapter, idx) => {
+                if (chapter.isSeparator) {
+                  return (
+                    <div key={chapter.id} className="pt-6 pb-2 -ml-6">
+                      <span className="text-gold/60 font-cinzel text-[10px] tracking-[0.2em] font-bold block pl-6 border-b border-white/5 pb-2">
+                        {chapter.title}
+                      </span>
+                    </div>
+                  );
+                }
+                
+                const isActive = activeChapter === chapter.id;
+                
+                return (
+                  <button
+                    key={chapter.id}
+                    onClick={() => scrollToChapter(chapter.id)}
+                    className={`block w-full text-left transition-all duration-300 group ${isActive ? 'translate-x-1' : ''}`}
+                  >
+                    <div className="flex flex-col">
+                      <span className={`text-[10px] font-mono mb-1 transition-colors ${isActive ? 'text-crimson' : 'text-gray-600 group-hover:text-gray-400'}`}>
+                        {(idx + 1).toString().padStart(2, '0')}
+                      </span>
+                      <span className={`font-medium text-xs font-montserrat leading-snug transition-colors line-clamp-2 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                        {chapter.title.split('—')[1] || chapter.title}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="p-6 border-t border-crimson/10 bg-black/60">
-             <div className="flex items-center gap-3 opacity-60">
-                <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                <span className="text-[10px] font-mono text-gray-400 uppercase">System Online</span>
-             </div>
+          {/* Sidebar Footer */}
+          <div className="p-6 border-t border-white/5">
+             <a href={book.buyUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-gold hover:text-white transition-colors text-xs font-cinzel tracking-widest uppercase">
+                Acquire Tome <ExternalLink className="w-3 h-3" />
+             </a>
           </div>
         </div>
 
-        {/* Main Content Area */}
-        <div className="flex-1 flex flex-col relative bg-[#050000]">
+        {/* Reading Content Area */}
+        <div className="flex-1 flex flex-col relative h-full bg-[#030005]">
           
-          {/* Top Bar */}
-          <div className="h-20 border-b border-crimson/10 flex items-center justify-between px-8 bg-gradient-to-r from-crimson/5 to-transparent sticky top-0 z-10 backdrop-blur-sm">
-             <div className="flex items-center gap-4">
-                <BookOpen className="w-5 h-5 text-crimson" />
-                <span className="text-gray-400 font-cinzel text-sm tracking-widest uppercase">Reading Mode</span>
+          {/* Top Floating Header */}
+          <div className="absolute top-0 left-0 w-full z-30">
+             {/* Progress Bar */}
+             <div className="h-[2px] w-full bg-white/5">
+                <div 
+                  className="h-full bg-gradient-to-r from-crimson via-gold to-crimson shadow-[0_0_10px_#d4af37]"
+                  style={{ width: `${scrollProgress}%`, transition: 'width 0.1s linear' }}
+                />
              </div>
-             <div className="hidden md:block w-32 h-[1px] bg-gradient-to-r from-transparent via-crimson/50 to-transparent" />
+             
+             {/* Controls */}
+             <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-b from-[#030005] to-transparent">
+                <div className="md:hidden">
+                   <h2 className="text-gray-400 font-cinzel text-xs tracking-widest truncate max-w-[200px]">{book.title}</h2>
+                </div>
+                <div className="hidden md:block">
+                   {/* Empty on desktop to keep right aligned */}
+                </div>
+                <div className="flex items-center gap-4">
+                   <button className="text-gray-500 hover:text-gold transition-colors" title="Share">
+                      <Share2 className="w-5 h-5" />
+                   </button>
+                   <button 
+                      onClick={onClose}
+                      className="text-gray-400 hover:text-white hover:rotate-90 transition-all duration-300 bg-white/5 p-2 rounded-full hover:bg-white/10"
+                   >
+                      <X className="w-5 h-5" />
+                   </button>
+                </div>
+             </div>
           </div>
 
-          {/* Text Scroll Area */}
+          {/* Scrollable Text Canvas */}
           <div 
             ref={contentRef}
+            onScroll={handleScroll}
             className="flex-1 overflow-y-auto custom-scrollbar scroll-smooth relative"
           >
-            {/* Texture & Glow Background */}
-            <div className="absolute inset-0 pointer-events-none z-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 mix-blend-overlay" />
-            <div className="absolute inset-0 pointer-events-none z-0 bg-[radial-gradient(circle_at_50%_0%,_rgba(138,28,28,0.08)_0%,_transparent_70%)]" />
-
             {isLoading ? (
-              <div className="max-w-3xl mx-auto py-24">
-                <ContentSkeleton />
-              </div>
+              <ContentSkeleton />
             ) : (
-              <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 py-24 pb-48">
+              <div className="max-w-3xl mx-auto px-6 md:px-12 pb-48 pt-24">
                 
-                {/* Book Header */}
-                <div className="text-center mb-24 relative">
-                   <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-gray-800 to-transparent" />
-                   <div className="relative inline-block bg-[#050000] px-6">
-                      <div className="w-16 h-16 mx-auto mb-6 border border-gold/30 rotate-45 flex items-center justify-center">
-                         <div className="w-12 h-12 border border-crimson/30 flex items-center justify-center">
-                            <Feather className="w-5 h-5 text-gold -rotate-45" />
-                         </div>
-                      </div>
+                {/* Minimalist Book Title Page */}
+                <div className="text-center py-20 mb-20 border-b border-white/5 relative">
+                   <div className="inline-block p-4 border border-gold/20 rotate-45 mb-8">
+                      <div className="w-3 h-3 bg-crimson shadow-[0_0_15px_#8a1c1c] -rotate-45" />
                    </div>
-                   <h1 className="text-3xl md:text-5xl font-cinzel text-white mb-6 drop-shadow-lg">{book.title}</h1>
-                   <p className="text-gray-400 font-montserrat text-sm md:text-lg italic max-w-2xl mx-auto leading-relaxed">
+                   <h1 className="text-4xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-500 mb-6 tracking-tight">
+                     {book.title}
+                   </h1>
+                   <p className="text-gray-400 font-reading italic text-lg leading-relaxed max-w-xl mx-auto">
                       "{book.excerpt}"
                    </p>
                 </div>
 
-                {/* Chapters */}
-                <div className="space-y-32">
-                  {book.chapters.map((chapter, idx) => (
-                    <div key={chapter.id} id={chapter.id} className="relative group">
-                      
-                      {/* Chapter Marker */}
-                      <div className="flex items-center gap-4 mb-12 opacity-50 group-hover:opacity-100 transition-opacity">
-                         <span className="font-mono text-crimson text-xs">0{idx + 1}</span>
-                         <div className="h-[1px] flex-1 bg-gradient-to-r from-crimson/50 to-transparent" />
-                      </div>
+                {/* Chapter Content Rendering */}
+                <div className="space-y-24">
+                  {book.chapters.map((chapter, idx) => {
+                    // Separator / Book Cover Page within Scroll
+                    if (chapter.isSeparator) {
+                      return (
+                        <div key={chapter.id} id={chapter.id} className="min-h-[50vh] flex flex-col items-center justify-center text-center my-12 relative group">
+                           <div className="absolute inset-0 bg-gradient-to-b from-crimson/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                           <span className="font-cinzel text-crimson text-sm tracking-[0.5em] uppercase mb-6 relative z-10">Part of the Trilogy</span>
+                           <h2 className="text-6xl md:text-8xl font-display text-white relative z-10 drop-shadow-2xl">
+                             {chapter.title}
+                           </h2>
+                           <div className="w-1 h-20 bg-gradient-to-b from-gold to-transparent mt-12 opacity-50" />
+                        </div>
+                      );
+                    }
 
-                      {/* Chapter Title */}
-                      <h3 className="text-2xl md:text-3xl font-cinzel text-gold mb-10 pl-6 border-l-2 border-crimson">
-                        {chapter.title}
-                      </h3>
+                    // Standard Chapter
+                    return (
+                      <div key={chapter.id} id={chapter.id} className="relative animate-in fade-in slide-in-from-bottom-8 duration-700">
+                        
+                        <div className="mb-12 text-center">
+                           <span className="font-mono text-crimson/60 text-xs mb-2 block">0{idx + 1}</span>
+                           <h3 className="text-3xl font-display text-gray-100">
+                             {chapter.title.includes('—') ? chapter.title.split('—')[1] : chapter.title}
+                           </h3>
+                        </div>
 
-                      {/* Text Content */}
-                      <div className="prose prose-invert prose-lg max-w-none">
-                        <p className="text-gray-300 font-montserrat leading-[2.2] font-light text-justify text-lg md:text-xl tracking-wide">
-                          <span className="float-left text-6xl font-cinzel text-crimson mr-4 mt-[-10px] leading-none drop-shadow-[0_0_15px_rgba(138,28,28,0.6)]">
-                            {chapter.content.charAt(0)}
-                          </span>
-                          {chapter.content.slice(1)}
-                        </p>
+                        <div className="font-reading text-lg md:text-[1.15rem] leading-loose text-gray-300 text-justify tracking-wide space-y-8 selection:bg-crimson/30 selection:text-white">
+                          {chapter.content.split('\n\n').map((paragraph, pIdx) => {
+                            // Drop Cap Logic for first paragraph
+                            if (pIdx === 0) {
+                              const firstChar = paragraph.charAt(0);
+                              const rest = paragraph.slice(1);
+                              return (
+                                <p key={pIdx} className="relative">
+                                  <span className="float-left text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold to-crimson mr-3 mt-[-8px] leading-[0.8] drop-shadow-sm">
+                                    {firstChar}
+                                  </span>
+                                  {rest}
+                                </p>
+                              );
+                            }
+                            return <p key={pIdx}>{paragraph}</p>;
+                          })}
+                        </div>
+
+                        <Divider />
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
 
-                {/* Footer Message */}
-                <div className="mt-32 p-12 border border-crimson/20 bg-gradient-to-b from-crimson/5 to-transparent text-center relative overflow-hidden">
-                   <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-crimson/50 to-transparent" />
-                   <h4 className="text-2xl font-cinzel text-white mb-4">The Journey Continues</h4>
-                   <p className="text-gray-400 font-montserrat mb-8 max-w-lg mx-auto">
-                      You have reached the edge of the preview. The full truth awaits in the complete volume.
-                   </p>
-                   <a 
-                     href={book.buyUrl} 
-                     target="_blank" 
-                     rel="noopener noreferrer"
-                     className="inline-flex items-center gap-3 px-8 py-4 bg-crimson text-white font-cinzel font-bold tracking-[0.2em] hover:bg-white hover:text-black transition-all duration-300 shadow-[0_0_30px_rgba(138,28,28,0.4)]"
-                   >
-                      ACQUIRE FULL TOMES <ChevronRight className="w-4 h-4" />
-                   </a>
+                {/* End of Preview CTA */}
+                <div className="mt-24 p-1 bg-gradient-to-r from-transparent via-crimson/30 to-transparent rounded-sm">
+                   <div className="bg-[#080808] p-12 text-center">
+                      <BookOpen className="w-8 h-8 text-gold mx-auto mb-6 opacity-80" />
+                      <h4 className="text-2xl font-display text-white mb-4">The Story Continues</h4>
+                      <p className="text-gray-400 font-reading mb-8">
+                         The threads of fate are not yet cut. Secure the complete trilogy to witness the end.
+                      </p>
+                      <button className="px-10 py-4 bg-white text-black font-cinzel font-bold tracking-[0.2em] text-xs hover:bg-gold transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                         PURCHASE FULL EDITION
+                      </button>
+                   </div>
                 </div>
 
               </div>

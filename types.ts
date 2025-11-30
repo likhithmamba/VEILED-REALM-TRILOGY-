@@ -2,6 +2,7 @@ export interface Chapter {
   id: string;
   title: string;
   content: string;
+  isSeparator?: boolean;
 }
 
 export interface Book {
