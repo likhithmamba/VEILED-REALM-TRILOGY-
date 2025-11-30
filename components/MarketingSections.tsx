@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronDown, Download, Mail, User, BookOpen } from 'lucide-react';
+import { ChevronDown, Download, Mail, User, BookOpen, Database, FileText, Lock } from 'lucide-react';
 import { BIO_TEXT, BIO_QUOTE, LORE_ITEMS, CHARACTERS, DOWNLOADS } from '../constants';
 
 // Helper Hook for Scroll Animations
@@ -143,7 +143,7 @@ export const CharacterSection: React.FC = () => {
   );
 };
 
-// 7. THE VAULT (Downloads)
+// 7. THE ARCHIVE (Vault Redesign)
 interface VaultSectionProps {
   onOpenStarterPack?: () => void;
 }
@@ -152,46 +152,95 @@ export const VaultSection: React.FC<VaultSectionProps> = ({ onOpenStarterPack })
   const { elementRef, isVisible } = useScrollObserver();
 
   return (
-    <section ref={elementRef} className="py-32 px-4 bg-gradient-to-b from-void to-[#0a0a0a] border-t border-white/5">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className={`text-4xl font-cinzel text-gold mb-4 tracking-[0.2em] transition-all duration-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          THE ARCHIVE
-        </h2>
-        <p className="text-gray-500 mb-16 uppercase tracking-widest text-xs">Knowledge is the only currency here</p>
+    <section ref={elementRef} className="relative py-40 px-6 bg-[#030005] overflow-hidden border-t border-white/5">
+      {/* Background Decor */}
+      <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #2d1b4e 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+      <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-[#050505] via-transparent to-[#050505] z-0" />
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {DOWNLOADS.map((item, index) => (
-            <div 
-              key={item.id} 
-              className={`
-                relative border border-gray-800 p-10 flex flex-col items-center bg-[#080808] hover:bg-[#0c0c0c] transition-all duration-500 group transform 
-                ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}
-                hover:border-gold/30 hover:shadow-[0_0_30px_rgba(212,175,55,0.05)]
-              `}
-              style={{ transitionDelay: `${index * 200}ms` }}
-            >
-              <Download className="w-10 h-10 text-gray-700 mb-6 group-hover:text-gold group-hover:animate-bounce transition-colors" />
-              <h4 className="text-white font-cinzel text-xl mb-2">{item.title}</h4>
-              <span className="text-xs text-gray-500 font-mono mb-8 border px-2 py-1 border-gray-800 rounded">{item.type} • {item.size}</span>
-              
-              <button 
-                onClick={item.title.includes('Free Sample') && onOpenStarterPack ? onOpenStarterPack : undefined}
-                className="w-full py-4 border border-gray-800 text-xs font-cinzel text-gray-400 hover:text-white hover:border-gold hover:bg-gold/10 transition-all uppercase tracking-[0.2em] font-bold"
-              >
-                Access File
-              </button>
-            </div>
-          ))}
+        {/* Header */}
+        <div className={`flex flex-col items-center mb-24 transition-all duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0 translate-y-10'}`}>
+           <span className="text-crimson/80 font-mono text-xs tracking-widest mb-4 border border-crimson/30 px-3 py-1 rounded-full">SECURE CONNECTION ESTABLISHED</span>
+           <h2 className="text-5xl md:text-6xl font-cinzel text-white mb-4 tracking-[0.1em] text-shadow-glow">THE ARCHIVE</h2>
+           <p className="text-gray-500 uppercase tracking-[0.3em] text-sm">Artifacts for the initiated</p>
         </div>
-        
-        <div className={`mt-20 transition-all duration-1000 delay-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <button 
-            onClick={onOpenStarterPack}
-            className="px-12 py-5 bg-gold text-black font-cinzel font-bold tracking-[0.2em] hover:bg-white transition-colors shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:shadow-[0_0_40px_rgba(255,255,255,0.6)]"
-          >
-            DOWNLOAD STARTER PACK - FREE
-          </button>
-          <p className="mt-6 text-xs text-gray-600 font-montserrat uppercase tracking-wider">No Signup Required • Direct Link</p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          
+          {/* Left: Artifact Visual */}
+          <div className={`relative order-2 lg:order-1 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-20'}`}>
+             <div className="relative aspect-square max-w-md mx-auto">
+                <div className="absolute inset-0 bg-gradient-radial from-crimson/20 to-transparent blur-3xl animate-pulse-slow" />
+                
+                {/* 3D Floating Elements Simulation */}
+                <div className="relative z-10 w-full h-full border border-gray-800 bg-black/50 backdrop-blur-sm p-8 flex flex-col items-center justify-center text-center shadow-[0_0_50px_rgba(0,0,0,0.8)] border-t-gold/20">
+                   <Database className="w-24 h-24 text-gold mb-8 opacity-80 animate-float" />
+                   <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gold/50 to-transparent mb-8" />
+                   <div className="grid grid-cols-2 gap-4 w-full">
+                      <div className="p-4 border border-gray-800 bg-black/40">
+                         <FileText className="w-6 h-6 text-crimson mb-2 mx-auto" />
+                         <div className="text-[10px] text-gray-500 font-mono">STARTER_PACK.PDF</div>
+                      </div>
+                      <div className="p-4 border border-gray-800 bg-black/40">
+                         <Lock className="w-6 h-6 text-gray-600 mb-2 mx-auto" />
+                         <div className="text-[10px] text-gray-600 font-mono">FULL_TOMES_LOCKED</div>
+                      </div>
+                   </div>
+                </div>
+                
+                {/* Decorative Rings */}
+                <div className="absolute inset-[-20px] border border-gray-800 rounded-full opacity-20 animate-spin-slow" style={{ animationDuration: '60s' }} />
+                <div className="absolute inset-[-60px] border border-dashed border-crimson/20 rounded-full opacity-20 animate-spin-slow" style={{ animationDirection: 'reverse', animationDuration: '40s' }} />
+             </div>
+          </div>
+
+          {/* Right: Actions */}
+          <div className={`order-1 lg:order-2 space-y-8 transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-20'}`}>
+             
+             {/* Starter Pack Hero Card */}
+             <div className="relative group cursor-pointer" onClick={onOpenStarterPack}>
+                <div className="absolute inset-0 bg-gold/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative bg-[#0a0a0a] border border-gold/30 p-8 md:p-12 hover:border-gold transition-all duration-300 shadow-[0_0_30px_rgba(212,175,55,0.05)] hover:shadow-[0_0_50px_rgba(212,175,55,0.15)]">
+                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-gold to-transparent opacity-50" />
+                   
+                   <div className="flex justify-between items-start mb-6">
+                      <h3 className="text-3xl font-cinzel text-white group-hover:text-gold transition-colors">STARTER PACK</h3>
+                      <Download className="w-8 h-8 text-gray-600 group-hover:text-gold transition-colors" />
+                   </div>
+                   
+                   <p className="text-gray-400 font-montserrat text-lg leading-relaxed mb-8">
+                      Access the prohibited archives. Contains the Prologue and first 5 Chapters of all three books. 
+                      <span className="text-crimson block mt-2 font-bold">WARNING: Contains Truth.</span>
+                   </p>
+
+                   <div className="flex items-center gap-4 text-xs font-mono text-gray-500 mb-8">
+                      <span className="border border-gray-800 px-2 py-1">PDF FORMAT</span>
+                      <span className="border border-gray-800 px-2 py-1">2.4 MB</span>
+                      <span className="text-green-500">● AVAILABLE</span>
+                   </div>
+
+                   <button className="w-full py-5 bg-gold text-black font-cinzel font-bold tracking-[0.2em] hover:bg-white transition-colors flex items-center justify-center gap-3">
+                      INITIATE DOWNLOAD <ChevronDown className="w-4 h-4" />
+                   </button>
+                </div>
+             </div>
+
+             {/* Secondary Downloads */}
+             <div className="grid grid-cols-2 gap-4">
+                {DOWNLOADS.filter(d => !d.title.includes('Free Sample')).map(item => (
+                   <div key={item.id} className="border border-gray-800 p-6 bg-black hover:bg-gray-900 transition-colors group">
+                      <div className="flex items-center justify-between mb-2">
+                         <span className="text-gray-400 font-cinzel text-sm group-hover:text-white">{item.title}</span>
+                         <Download className="w-4 h-4 text-gray-700 group-hover:text-crimson transition-colors" />
+                      </div>
+                      <div className="text-[10px] text-gray-600 font-mono">{item.size}</div>
+                   </div>
+                ))}
+             </div>
+
+          </div>
+
         </div>
       </div>
     </section>
