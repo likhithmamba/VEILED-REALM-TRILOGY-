@@ -52,12 +52,12 @@ export const Hero: React.FC = () => {
           VEILED REALM
         </h1>
         
-        <p className="text-lg md:text-2xl text-gray-200 font-montserrat font-normal tracking-wide mb-10 max-w-3xl opacity-0 animate-fade-in-up drop-shadow-md leading-relaxed" style={{ animationDelay: '0.5s' }}>
+        <p className="text-lg md:text-2xl text-gray-100 font-montserrat font-normal tracking-wide mb-10 max-w-3xl opacity-0 animate-fade-in-up drop-shadow-md leading-relaxed" style={{ animationDelay: '0.5s' }}>
           A dark fantasy about truth, memory, and rebellion against the gods.
         </p>
 
         <div className="border-l-2 border-red-600 pl-6 py-2 max-w-xl mx-auto text-left bg-gradient-to-r from-gray-900/60 to-transparent backdrop-blur-sm opacity-0 animate-fade-in-up mb-12" style={{ animationDelay: '0.7s' }}>
-          <p className="italic text-gray-300 font-serif text-xl font-normal">
+          <p className="italic text-gray-200 font-serif text-xl font-normal">
             “Every world ends twice — first in memory, then in belief.”
           </p>
         </div>

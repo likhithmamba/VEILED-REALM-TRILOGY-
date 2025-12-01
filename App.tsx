@@ -36,8 +36,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-200 font-body selection:bg-red-900 selection:text-white overflow-x-hidden relative antialiased">
       
-      {/* Global Cinematic Grain Texture */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.04] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
+      {/* Global Cinematic Grain Texture - Reduced Opacity to 0.02 */}
+      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.02] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
 
       {/* --- 1. HERO SECTION --- */}
       <Hero />
@@ -54,7 +54,7 @@ export default function App() {
           <div className="text-center mb-24 animate-fade-in-up">
             <h2 className="text-5xl md:text-6xl font-fantasy text-white mb-4 drop-shadow-lg tracking-wide">The Trilogy</h2>
             <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
-            <p className="text-gray-300 max-w-2xl mx-auto text-lg font-normal leading-relaxed">
+            <p className="text-gray-200 max-w-2xl mx-auto text-lg font-normal leading-relaxed">
               A story of rebellion, of love sharpened into a weapon, and of worlds rebuilt by choice instead of destiny.
             </p>
           </div>
@@ -82,11 +82,11 @@ export default function App() {
       <AuthorNoteSection />
 
       {/* --- 10. FOOTER --- */}
-      <footer className="py-16 bg-black border-t border-white/10 text-sm text-gray-400 font-sans relative z-10">
+      <footer className="py-16 bg-black border-t border-white/10 text-sm text-gray-300 font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <h4 className="text-yellow-500 font-fantasy text-lg mb-2 tracking-widest opacity-90">IMPERIAL X</h4>
-            <p className="font-normal text-gray-500">© 2025 ImperialX — All rights reserved.</p>
+            <p className="font-normal text-gray-400">© 2025 ImperialX — All rights reserved.</p>
           </div>
           
           <div className="flex gap-8">

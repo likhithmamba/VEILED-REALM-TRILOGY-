@@ -21,7 +21,7 @@ export const Timeline: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-cinzel text-yellow-400 mb-3 tracking-[0.2em]">THE AGES OF THE REALM</h2>
-          <p className="text-gray-400 font-montserrat text-sm uppercase tracking-widest">A History of Silence and Truth</p>
+          <p className="text-gray-300 font-montserrat text-sm uppercase tracking-widest font-bold">A History of Silence and Truth</p>
         </div>
 
         {/* Desktop Layout (Horizontal Carousel) */}
@@ -73,7 +73,7 @@ export const Timeline: React.FC = () => {
                       </div>
                       <div className="w-2/3">
                         <h4 className="text-2xl font-cinzel text-white mb-6">{epoch.title}</h4>
-                        <p className="text-gray-300 font-montserrat text-lg leading-relaxed">{epoch.description}</p>
+                        <p className="text-gray-300 font-montserrat text-lg leading-relaxed font-normal">{epoch.description}</p>
                       </div>
                     </div>
                   </div>
@@ -98,7 +98,7 @@ export const Timeline: React.FC = () => {
 
               <span className="text-xs font-cinzel text-yellow-400 tracking-widest uppercase mb-1 block">{epoch.year}</span>
               <h3 className="text-xl font-cinzel text-white mb-3">{epoch.title}</h3>
-              <p className="text-sm text-gray-300 font-montserrat leading-relaxed">{epoch.description}</p>
+              <p className="text-sm text-gray-300 font-montserrat leading-relaxed font-normal">{epoch.description}</p>
             </div>
           ))}
         </div>

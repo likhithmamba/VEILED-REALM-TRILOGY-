@@ -63,7 +63,7 @@ export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
               <h3 className="text-xl font-cinzel text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300 leading-snug">
                 {book.title}
               </h3>
-              <p className="text-sm text-gray-300 leading-relaxed font-normal line-clamp-4">
+              <p className="text-sm text-gray-200 leading-relaxed font-normal line-clamp-4">
                 {book.description}
               </p>
             </div>
