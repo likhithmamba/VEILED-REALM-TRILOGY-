@@ -34,7 +34,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-950 text-gray-200 font-body selection:bg-red-900 selection:text-white overflow-x-hidden relative">
+    <div className="min-h-screen bg-gray-950 text-gray-200 font-body selection:bg-red-900 selection:text-white overflow-x-hidden relative antialiased">
       
       {/* Global Cinematic Grain Texture */}
       <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.04] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
@@ -52,9 +52,9 @@ export default function App() {
         
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-24 animate-fade-in-up">
-            <h2 className="text-5xl md:text-6xl font-fantasy text-gray-100 mb-4 drop-shadow-lg tracking-wide">The Trilogy</h2>
-            <div className="w-24 h-1 bg-red-800 mx-auto rounded-full mb-6"></div>
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+            <h2 className="text-5xl md:text-6xl font-fantasy text-white mb-4 drop-shadow-lg tracking-wide">The Trilogy</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-300 max-w-2xl mx-auto text-lg font-normal leading-relaxed">
               A story of rebellion, of love sharpened into a weapon, and of worlds rebuilt by choice instead of destiny.
             </p>
           </div>
@@ -82,20 +82,20 @@ export default function App() {
       <AuthorNoteSection />
 
       {/* --- 10. FOOTER --- */}
-      <footer className="py-16 bg-black border-t border-white/5 text-sm text-gray-500 font-sans relative z-10">
+      <footer className="py-16 bg-black border-t border-white/10 text-sm text-gray-400 font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
-            <h4 className="text-yellow-600 font-fantasy text-lg mb-2 tracking-widest opacity-80">IMPERIAL X</h4>
-            <p className="font-light">© 2025 ImperialX — All rights reserved.</p>
+            <h4 className="text-yellow-500 font-fantasy text-lg mb-2 tracking-widest opacity-90">IMPERIAL X</h4>
+            <p className="font-normal text-gray-500">© 2025 ImperialX — All rights reserved.</p>
           </div>
           
           <div className="flex gap-8">
-            <a href="#" className="hover:text-red-600 transition-colors transform hover:scale-110 duration-300"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-red-600 transition-colors transform hover:scale-110 duration-300"><Instagram size={20} /></a>
+            <a href="#" className="hover:text-red-500 transition-colors transform hover:scale-110 duration-300"><Twitter size={20} /></a>
+            <a href="#" className="hover:text-red-500 transition-colors transform hover:scale-110 duration-300"><Instagram size={20} /></a>
           </div>
 
           <div className="text-center md:text-right">
-            <a href="mailto:reach@imperialxfiction.com" className="hover:text-gray-300 transition-colors font-light">reach@imperialxfiction.com</a>
+            <a href="mailto:reach@imperialxfiction.com" className="hover:text-white transition-colors font-medium">reach@imperialxfiction.com</a>
           </div>
         </div>
       </footer>

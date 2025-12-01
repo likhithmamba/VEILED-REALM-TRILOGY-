@@ -20,8 +20,8 @@ export const Timeline: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-cinzel text-gold mb-3 tracking-[0.2em]">THE AGES OF THE REALM</h2>
-          <p className="text-gray-500 font-montserrat text-sm uppercase tracking-widest">A History of Silence and Truth</p>
+          <h2 className="text-4xl font-cinzel text-yellow-400 mb-3 tracking-[0.2em]">THE AGES OF THE REALM</h2>
+          <p className="text-gray-400 font-montserrat text-sm uppercase tracking-widest">A History of Silence and Truth</p>
         </div>
 
         {/* Desktop Layout (Horizontal Carousel) */}
@@ -39,7 +39,7 @@ export const Timeline: React.FC = () => {
                 className={`relative z-10 w-4 h-4 rounded-full transition-all duration-300 transform ${activeIndex === idx ? 'scale-150 bg-white shadow-[0_0_15px_rgba(255,255,255,0.8)]' : 'bg-gray-700 hover:bg-gray-500'} ${idx <= activeIndex ? 'bg-gold' : ''}`}
               >
                 {activeIndex === idx && (
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-xs font-cinzel text-gold whitespace-nowrap opacity-0 animate-fade-in-up">
+                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 text-xs font-cinzel text-yellow-400 whitespace-nowrap opacity-0 animate-fade-in-up">
                     {epoch.year}
                   </div>
                 )}
@@ -68,12 +68,12 @@ export const Timeline: React.FC = () => {
                     
                     <div className="relative z-10 flex gap-12 items-center">
                       <div className="w-1/3 text-right border-r border-crimson/30 pr-12">
-                        <span className="block text-6xl font-cinzel text-gray-800 font-bold opacity-50 mb-2">{idx + 1}</span>
-                        <h3 className="text-3xl font-cinzel text-gold">{epoch.year}</h3>
+                        <span className="block text-6xl font-cinzel text-gray-700 font-bold opacity-50 mb-2">{idx + 1}</span>
+                        <h3 className="text-3xl font-cinzel text-yellow-400">{epoch.year}</h3>
                       </div>
                       <div className="w-2/3">
                         <h4 className="text-2xl font-cinzel text-white mb-6">{epoch.title}</h4>
-                        <p className="text-gray-400 font-montserrat text-lg leading-relaxed">{epoch.description}</p>
+                        <p className="text-gray-300 font-montserrat text-lg leading-relaxed">{epoch.description}</p>
                       </div>
                     </div>
                   </div>
@@ -96,9 +96,9 @@ export const Timeline: React.FC = () => {
                 {activeIndex === idx && <div className="w-2 h-2 bg-white rounded-full animate-pulse" />}
               </div>
 
-              <span className="text-xs font-cinzel text-gold tracking-widest uppercase mb-1 block">{epoch.year}</span>
+              <span className="text-xs font-cinzel text-yellow-400 tracking-widest uppercase mb-1 block">{epoch.year}</span>
               <h3 className="text-xl font-cinzel text-white mb-3">{epoch.title}</h3>
-              <p className="text-sm text-gray-400 font-montserrat leading-relaxed">{epoch.description}</p>
+              <p className="text-sm text-gray-300 font-montserrat leading-relaxed">{epoch.description}</p>
             </div>
           ))}
         </div>

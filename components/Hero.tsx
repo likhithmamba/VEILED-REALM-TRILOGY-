@@ -43,21 +43,21 @@ export const Hero: React.FC = () => {
       >
         {/* Animated Reveal Header */}
         <div className="mb-8 flex items-center justify-center space-x-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <div className="h-[1px] w-16 bg-yellow-600/50"></div>
-          <span className="text-yellow-500 font-cinzel tracking-[0.4em] text-xs font-bold uppercase">Imperial X Presents</span>
-          <div className="h-[1px] w-16 bg-yellow-600/50"></div>
+          <div className="h-[1px] w-16 bg-yellow-500/50"></div>
+          <span className="text-yellow-400 font-cinzel tracking-[0.4em] text-xs font-bold uppercase">Imperial X Presents</span>
+          <div className="h-[1px] w-16 bg-yellow-500/50"></div>
         </div>
         
-        <h1 className="text-6xl md:text-9xl font-cinzel font-bold text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-400 drop-shadow-2xl tracking-wide opacity-0 animate-fade-in-up mb-6" style={{ animationDelay: '0.3s' }}>
+        <h1 className="text-6xl md:text-9xl font-cinzel font-bold text-white drop-shadow-2xl tracking-wide opacity-0 animate-fade-in-up mb-6" style={{ animationDelay: '0.3s' }}>
           VEILED REALM
         </h1>
         
-        <p className="text-lg md:text-2xl text-gray-300 font-montserrat font-light tracking-wide mb-10 max-w-3xl opacity-0 animate-fade-in-up drop-shadow-md leading-relaxed" style={{ animationDelay: '0.5s' }}>
+        <p className="text-lg md:text-2xl text-gray-200 font-montserrat font-normal tracking-wide mb-10 max-w-3xl opacity-0 animate-fade-in-up drop-shadow-md leading-relaxed" style={{ animationDelay: '0.5s' }}>
           A dark fantasy about truth, memory, and rebellion against the gods.
         </p>
 
-        <div className="border-l-2 border-red-700/60 pl-6 py-2 max-w-xl mx-auto text-left bg-gradient-to-r from-gray-900/60 to-transparent backdrop-blur-sm opacity-0 animate-fade-in-up mb-12" style={{ animationDelay: '0.7s' }}>
-          <p className="italic text-gray-400 font-serif text-xl">
+        <div className="border-l-2 border-red-600 pl-6 py-2 max-w-xl mx-auto text-left bg-gradient-to-r from-gray-900/60 to-transparent backdrop-blur-sm opacity-0 animate-fade-in-up mb-12" style={{ animationDelay: '0.7s' }}>
+          <p className="italic text-gray-300 font-serif text-xl font-normal">
             “Every world ends twice — first in memory, then in belief.”
           </p>
         </div>
@@ -65,7 +65,7 @@ export const Hero: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
           <button 
             onClick={() => scrollToSection('books')}
-            className="group relative px-8 py-4 overflow-hidden bg-white/5 border border-white/10 text-gray-200 font-cinzel font-bold tracking-widest transition-all duration-300 hover:border-red-600/50 hover:bg-red-900/20 backdrop-blur-sm"
+            className="group relative px-8 py-4 overflow-hidden bg-white/5 border border-white/10 text-gray-100 font-cinzel font-bold tracking-widest transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/20 backdrop-blur-sm"
           >
             <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
             <span className="relative z-10 flex items-center gap-3">
@@ -76,7 +76,7 @@ export const Hero: React.FC = () => {
 
           <button 
             onClick={() => scrollToSection('newsletter')}
-            className="group relative px-8 py-4 overflow-hidden bg-red-800 text-white font-cinzel font-bold tracking-widest transition-all duration-300 hover:bg-red-700 shadow-lg hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
+            className="group relative px-8 py-4 overflow-hidden bg-red-700 text-white font-cinzel font-bold tracking-widest transition-all duration-300 hover:bg-red-600 shadow-lg hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
           >
             <span className="relative z-10 flex items-center gap-3">
               JOIN THE REALM
@@ -87,8 +87,8 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-500 z-20">
-        <ChevronDown className="w-6 h-6 opacity-70" />
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-400 z-20">
+        <ChevronDown className="w-6 h-6 opacity-80" />
       </div>
     </div>
   );

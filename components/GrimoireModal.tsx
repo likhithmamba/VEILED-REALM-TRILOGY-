@@ -78,7 +78,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
   };
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 overflow-hidden">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-0 overflow-hidden antialiased">
       
       {/* Immersive Backdrop (Void Gradient) */}
       <div 
@@ -128,10 +128,10 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                     className={`block w-full text-left transition-all duration-300 group ${isActive ? 'translate-x-1' : ''}`}
                   >
                     <div className="flex flex-col">
-                      <span className={`text-[10px] font-mono mb-1 transition-colors ${isActive ? 'text-crimson' : 'text-gray-600 group-hover:text-gray-400'}`}>
+                      <span className={`text-[10px] font-mono mb-1 transition-colors ${isActive ? 'text-crimson' : 'text-gray-500 group-hover:text-gray-300'}`}>
                         {(idx + 1).toString().padStart(2, '0')}
                       </span>
-                      <span className={`font-medium text-xs font-montserrat leading-snug transition-colors line-clamp-2 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-gray-300'}`}>
+                      <span className={`font-medium text-xs font-montserrat leading-snug transition-colors line-clamp-2 ${isActive ? 'text-white' : 'text-gray-400 group-hover:text-gray-200'}`}>
                         {chapter.title.split('—')[1] || chapter.title}
                       </span>
                     </div>
@@ -143,7 +143,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
 
           {/* Sidebar Footer */}
           <div className="p-6 border-t border-white/5">
-             <a href={book.buyUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-gold hover:text-white transition-colors text-xs font-cinzel tracking-widest uppercase">
+             <a href={book.buyUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-yellow-500 hover:text-white transition-colors text-xs font-cinzel tracking-widest uppercase">
                 Acquire Tome <ExternalLink className="w-3 h-3" />
              </a>
           </div>
@@ -165,13 +165,13 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
              {/* Controls */}
              <div className="flex items-center justify-between px-6 py-4 bg-gradient-to-b from-[#030005] to-transparent">
                 <div className="md:hidden">
-                   <h2 className="text-gray-400 font-cinzel text-xs tracking-widest truncate max-w-[200px]">{book.title}</h2>
+                   <h2 className="text-gray-300 font-cinzel text-xs tracking-widest truncate max-w-[200px]">{book.title}</h2>
                 </div>
                 <div className="hidden md:block">
                    {/* Empty on desktop to keep right aligned */}
                 </div>
                 <div className="flex items-center gap-4">
-                   <button className="text-gray-500 hover:text-gold transition-colors" title="Share">
+                   <button className="text-gray-400 hover:text-yellow-400 transition-colors" title="Share">
                       <Share2 className="w-5 h-5" />
                    </button>
                    <button 
@@ -197,13 +197,13 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                 
                 {/* Minimalist Book Title Page */}
                 <div className="text-center py-20 mb-20 border-b border-white/5 relative">
-                   <div className="inline-block p-4 border border-gold/20 rotate-45 mb-8">
+                   <div className="inline-block p-4 border border-yellow-500/20 rotate-45 mb-8">
                       <div className="w-3 h-3 bg-crimson shadow-[0_0_15px_#8a1c1c] -rotate-45" />
                    </div>
-                   <h1 className="text-4xl md:text-6xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-b from-gray-100 to-gray-500 mb-6 tracking-tight">
+                   <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6 tracking-tight">
                      {book.title}
                    </h1>
-                   <p className="text-gray-400 font-reading italic text-lg leading-relaxed max-w-xl mx-auto">
+                   <p className="text-gray-300 font-reading italic text-lg leading-relaxed max-w-xl mx-auto">
                       "{book.excerpt}"
                    </p>
                 </div>
@@ -216,7 +216,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                       return (
                         <div key={chapter.id} id={chapter.id} className="min-h-[50vh] flex flex-col items-center justify-center text-center my-12 relative group">
                            <div className="absolute inset-0 bg-gradient-to-b from-crimson/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                           <span className="font-cinzel text-crimson text-sm tracking-[0.5em] uppercase mb-6 relative z-10">Part of the Trilogy</span>
+                           <span className="font-cinzel text-red-500 text-sm tracking-[0.5em] uppercase mb-6 relative z-10">Part of the Trilogy</span>
                            <h2 className="text-6xl md:text-8xl font-display text-white relative z-10 drop-shadow-2xl">
                              {chapter.title}
                            </h2>
@@ -230,13 +230,13 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                       <div key={chapter.id} id={chapter.id} className="relative animate-in fade-in slide-in-from-bottom-8 duration-700">
                         
                         <div className="mb-12 text-center">
-                           <span className="font-mono text-crimson/60 text-xs mb-2 block">0{idx + 1}</span>
-                           <h3 className="text-3xl font-display text-gray-100">
+                           <span className="font-mono text-red-500/60 text-xs mb-2 block">0{idx + 1}</span>
+                           <h3 className="text-3xl font-display text-white">
                              {chapter.title.includes('—') ? chapter.title.split('—')[1] : chapter.title}
                            </h3>
                         </div>
 
-                        <div className="font-reading text-lg md:text-[1.15rem] leading-loose text-gray-300 text-justify tracking-wide space-y-8 selection:bg-crimson/30 selection:text-white">
+                        <div className="font-reading text-lg md:text-[1.15rem] leading-loose text-gray-200 text-justify tracking-wide space-y-8 selection:bg-crimson/30 selection:text-white">
                           {chapter.content.split('\n\n').map((paragraph, pIdx) => {
                             // Drop Cap Logic for first paragraph
                             if (pIdx === 0) {
@@ -244,7 +244,7 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                               const rest = paragraph.slice(1);
                               return (
                                 <p key={pIdx} className="relative">
-                                  <span className="float-left text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-gold to-crimson mr-3 mt-[-8px] leading-[0.8] drop-shadow-sm">
+                                  <span className="float-left text-7xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-yellow-400 to-red-600 mr-3 mt-[-8px] leading-[0.8] drop-shadow-sm">
                                     {firstChar}
                                   </span>
                                   {rest}
@@ -262,14 +262,14 @@ export const GrimoireModal: React.FC<GrimoireModalProps> = ({ book, onClose }) =
                 </div>
 
                 {/* End of Preview CTA */}
-                <div className="mt-24 p-1 bg-gradient-to-r from-transparent via-crimson/30 to-transparent rounded-sm">
+                <div className="mt-24 p-1 bg-gradient-to-r from-transparent via-red-900/30 to-transparent rounded-sm">
                    <div className="bg-[#080808] p-12 text-center">
-                      <BookOpen className="w-8 h-8 text-gold mx-auto mb-6 opacity-80" />
+                      <BookOpen className="w-8 h-8 text-yellow-500 mx-auto mb-6 opacity-80" />
                       <h4 className="text-2xl font-display text-white mb-4">The Story Continues</h4>
-                      <p className="text-gray-400 font-reading mb-8">
+                      <p className="text-gray-300 font-reading mb-8">
                          The threads of fate are not yet cut. Secure the complete trilogy to witness the end.
                       </p>
-                      <button className="px-10 py-4 bg-white text-black font-cinzel font-bold tracking-[0.2em] text-xs hover:bg-gold transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+                      <button className="px-10 py-4 bg-white text-black font-cinzel font-bold tracking-[0.2em] text-xs hover:bg-yellow-400 transition-colors shadow-[0_0_30px_rgba(255,255,255,0.1)]">
                          PURCHASE FULL EDITION
                       </button>
                    </div>
