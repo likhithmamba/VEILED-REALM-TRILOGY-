@@ -12,10 +12,6 @@ import { GrimoireModal } from './components/GrimoireModal';
 import { AboutSection, LoreSection, CharacterSection, VaultSection, NewsletterSection, AuthorNoteSection } from './components/MarketingSections';
 import { Hero } from './components/Hero';
 
-/* DEPENDENCIES: npm install lucide-react
-   FONTS: Ensure 'Cinzel' and 'Montserrat' are imported in your index.css
-*/
-
 // --- MAIN COMPONENT ---
 export default function App() {
   const [email, setEmail] = useState("");
@@ -37,14 +33,12 @@ export default function App() {
     }, 1500);
   };
 
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
-    <div className="min-h-screen bg-void text-mist font-body selection:bg-crimson selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-gray-950 text-gray-200 font-body selection:bg-red-900 selection:text-white overflow-x-hidden relative">
       
+      {/* Global Cinematic Grain Texture */}
+      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.04] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
+
       {/* --- 1. HERO SECTION --- */}
       <Hero />
 
@@ -52,12 +46,15 @@ export default function App() {
       <AboutSection />
 
       {/* --- 3. THE TRILOGY (Interactive Cards) --- */}
-      <section id="books" className="py-24 px-6 bg-[#080808]">
+      <section id="books" className="py-32 px-6 bg-gradient-to-b from-gray-950 to-gray-900 relative">
+        {/* Subtle Divider */}
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-red-900/30 to-transparent"></div>
+        
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-fantasy text-white mb-6">The Trilogy</h2>
-            {/* Source: [cite: 676] */}
-            <p className="text-gray-400 max-w-2xl mx-auto text-lg">
+          <div className="text-center mb-24 animate-fade-in-up">
+            <h2 className="text-5xl md:text-6xl font-fantasy text-gray-100 mb-4 drop-shadow-lg tracking-wide">The Trilogy</h2>
+            <div className="w-24 h-1 bg-red-800 mx-auto rounded-full mb-6"></div>
+            <p className="text-gray-400 max-w-2xl mx-auto text-lg font-light leading-relaxed">
               A story of rebellion, of love sharpened into a weapon, and of worlds rebuilt by choice instead of destiny.
             </p>
           </div>
@@ -85,20 +82,20 @@ export default function App() {
       <AuthorNoteSection />
 
       {/* --- 10. FOOTER --- */}
-      <footer className="py-12 bg-black border-t border-white/5 text-sm text-gray-600 font-sans">
+      <footer className="py-16 bg-black border-t border-white/5 text-sm text-gray-500 font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
-            <h4 className="text-gold font-fantasy text-lg mb-1 tracking-widest">IMPERIAL X</h4>
-            <p>© 2025 ImperialX — All rights reserved.</p>
+            <h4 className="text-yellow-600 font-fantasy text-lg mb-2 tracking-widest opacity-80">IMPERIAL X</h4>
+            <p className="font-light">© 2025 ImperialX — All rights reserved.</p>
           </div>
           
           <div className="flex gap-8">
-            <a href="#" className="hover:text-crimson transition-colors"><Twitter size={20} /></a>
-            <a href="#" className="hover:text-crimson transition-colors"><Instagram size={20} /></a>
+            <a href="#" className="hover:text-red-600 transition-colors transform hover:scale-110 duration-300"><Twitter size={20} /></a>
+            <a href="#" className="hover:text-red-600 transition-colors transform hover:scale-110 duration-300"><Instagram size={20} /></a>
           </div>
 
           <div className="text-center md:text-right">
-            <a href="mailto:reach@imperialxfiction.com" className="hover:text-white transition-colors">reach@imperialxfiction.com</a>
+            <a href="mailto:reach@imperialxfiction.com" className="hover:text-gray-300 transition-colors font-light">reach@imperialxfiction.com</a>
           </div>
         </div>
       </footer>

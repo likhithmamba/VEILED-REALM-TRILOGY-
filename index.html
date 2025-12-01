@@ -8,7 +8,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Montserrat:wght@300;400;500;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Montserrat:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,11 +17,11 @@
         theme: {
           extend: {
             colors: {
-              void: '#050505',
-              crimson: '#8a1c1c',
-              gold: '#d4af37',
-              shadow: '#2d1b4e',
-              mist: '#a8b2d1',
+              void: '#030005', // Deep cinematic black
+              crimson: '#991b1b', // Red-800
+              gold: '#ca8a04', // Yellow-600
+              mist: '#e5e7eb', // Gray-200
+              shadow: '#9ca3af', // Gray-400
             },
             fontFamily: {
               cinzel: ['Cinzel', 'serif'],
@@ -32,13 +32,7 @@
               display: ['Playfair Display', 'serif'],
             },
             backgroundImage: {
-              'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-              'void-gradient': 'linear-gradient(to bottom, #050505 0%, #2d1b4e 50%, #050505 100%)',
-              'cosmic-red': 'radial-gradient(circle at center, rgba(138, 28, 28, 0.5) 0%, rgba(45, 27, 78, 0.2) 40%, rgba(5, 5, 5, 1) 80%)',
-            },
-            boxShadow: {
-              'glow': '0 0 20px rgba(138, 28, 28, 0.5)',
-              'crimson': '0 10px 40px -10px rgba(138, 28, 28, 0.5)',
+              'cosmic-gradient': 'linear-gradient(to bottom, #030005, #1a0505, #030005)',
             },
             keyframes: {
               float: {
@@ -47,43 +41,38 @@
               },
               'pulse-slow': {
                 '0%, 100%': { opacity: '1' },
-                '50%': { opacity: '0.8' },
+                '50%': { opacity: '0.6' },
               },
               'fade-in-up': {
-                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
                 '100%': { opacity: '1', transform: 'translateY(0)' },
               },
-              'nebula-drift': {
-                '0%': { backgroundPosition: '0% 50%' },
-                '50%': { backgroundPosition: '100% 50%' },
-                '100%': { backgroundPosition: '0% 50%' },
+              'slow-zoom': {
+                '0%': { transform: 'scale(1)' },
+                '100%': { transform: 'scale(1.1)' },
               },
-              'glitch': {
-                '0%': { transform: 'translate(0)' },
-                '20%': { transform: 'translate(-2px, 2px)' },
-                '40%': { transform: 'translate(-2px, -2px)' },
-                '60%': { transform: 'translate(2px, 2px)' },
-                '80%': { transform: 'translate(2px, -2px)' },
-                '100%': { transform: 'translate(0)' },
+              'shine': {
+                '100%': { left: '125%' },
+              },
+              'scan': {
+                '0%': { top: '0%', opacity: '0' },
+                '10%': { opacity: '1' },
+                '90%': { opacity: '1' },
+                '100%': { top: '100%', opacity: '0' },
               },
               'spin-slow': {
                 '0%': { transform: 'rotate(0deg)' },
                 '100%': { transform: 'rotate(360deg)' },
-              },
-              'magma-flow': {
-                '0%': { filter: 'hue-rotate(0deg) brightness(1)' },
-                '50%': { filter: 'hue-rotate(-10deg) brightness(1.2)' },
-                '100%': { filter: 'hue-rotate(0deg) brightness(1)' },
               }
             },
             animation: {
-              float: 'float 6s ease-in-out infinite',
-              'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
-              'fade-in-up': 'fade-in-up 1s ease-out forwards',
-              'nebula': 'nebula-drift 20s ease infinite',
-              'glitch': 'glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite',
+              float: 'float 8s ease-in-out infinite',
+              'pulse-slow': 'pulse-slow 6s ease-in-out infinite',
+              'fade-in-up': 'fade-in-up 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards',
+              'slow-zoom': 'slow-zoom 20s linear infinite alternate',
+              'shine': 'shine 1s',
+              'scan': 'scan 3s linear infinite',
               'spin-slow': 'spin-slow 20s linear infinite',
-              'magma': 'magma-flow 4s ease-in-out infinite',
             }
           }
         }
@@ -92,21 +81,19 @@
     <style>
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
-        background: #050505; 
+        background: #030005; 
       }
       ::-webkit-scrollbar-thumb {
-        background: #2d1b4e; 
-        border-radius: 4px;
+        background: #333; 
+        border-radius: 3px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #8a1c1c; 
+        background: #991b1b; 
       }
       
-      /* Hide scrollbar for specific elements but keep functionality */
       .scrollbar-hide::-webkit-scrollbar {
           display: none;
       }
@@ -114,25 +101,10 @@
           -ms-overflow-style: none;
           scrollbar-width: none;
       }
-
-      /* Shimmer Loading Effect */
-      @keyframes shimmer {
-        0% { background-position: -1000px 0; }
-        100% { background-position: 1000px 0; }
-      }
       
-      .animate-shimmer {
-        background: #0f0f0f;
-        background-image: linear-gradient(
-          to right,
-          #0f0f0f 0%,
-          #1a1a1a 20%,
-          #0f0f0f 40%,
-          #0f0f0f 100%
-        );
-        background-repeat: no-repeat;
-        background-size: 1000px 100%;
-        animation: shimmer 2s infinite linear forwards;
+      /* Smooth Scroll */
+      html {
+        scroll-behavior: smooth;
       }
     </style>
   <script type="importmap">
@@ -146,7 +118,7 @@
 }
 </script>
 </head>
-  <body class="bg-void text-gray-200 antialiased font-montserrat overflow-x-hidden selection:bg-crimson selection:text-white">
+  <body class="bg-void text-mist antialiased font-body overflow-x-hidden selection:bg-red-900 selection:text-white">
     <div id="root"></div>
   </body>
 </html>

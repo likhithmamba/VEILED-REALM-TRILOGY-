@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BookOpen } from 'lucide-react';
 import { BOOKS } from '../constants';
 import { Book } from '../types';
 import { BookCover } from './BookCover';
@@ -32,52 +31,42 @@ export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
   }, []);
 
   return (
-    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-16 perspective-1000 max-w-7xl mx-auto px-4">
+    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 max-w-7xl mx-auto px-4">
       {BOOKS.map((book, idx) => (
         <div 
           key={book.id}
           data-index={idx}
-          className={`book-card group relative flex flex-col items-center transition-all duration-1000 cubic-bezier(0.2, 0.8, 0.2, 1) transform ${
+          className={`book-card group relative flex flex-col transition-all duration-1000 ease-out transform ${
             visible.includes(idx) 
               ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-32'
+              : 'opacity-0 translate-y-24'
           }`}
-          style={{ transitionDelay: `${idx * 200}ms` }}
+          style={{ transitionDelay: `${idx * 150}ms` }}
         >
-          {/* 3D Card Container */}
-          <div 
-            className="relative w-full aspect-[2/3] max-w-[350px] mb-8 cursor-pointer transform transition-all duration-500 ease-out group-hover:-translate-y-4 group-hover:scale-[1.02] group-hover:shadow-[0_0_40px_rgba(138,28,28,0.4)] rounded-sm overflow-hidden border border-gray-800 hover:border-crimson/50 bg-[#0a0a0a]"
-            onClick={() => onBookSelect(book)}
-          >
-            {/* Custom Book Cover Component */}
-            <BookCover book={book} className="w-full h-full" />
+          <div className="relative h-full flex flex-col p-8 rounded-sm border border-white/5 bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.06] hover:border-red-900/30 hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] transition-all duration-500 group-hover:-translate-y-2">
             
-            {/* Interaction Overlay */}
-            <div className="absolute inset-0 bg-void/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-8 text-center backdrop-blur-[2px] z-50">
+            {/* Cover Area */}
+            <div 
+              className="relative w-full aspect-[2/3] mb-8 overflow-hidden rounded-sm shadow-2xl cursor-pointer group-hover:shadow-[0_0_25px_rgba(0,0,0,0.7)] transition-shadow duration-500"
+              onClick={() => onBookSelect(book)}
+            >
+              <BookCover book={book} className="w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out" />
               
-              <button 
-                className="mb-6 px-8 py-3 border border-gold text-gold font-cinzel tracking-widest text-sm hover:bg-gold hover:text-black transition-colors duration-300 flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform delay-100 font-bold shadow-[0_0_15px_rgba(212,175,55,0.3)]"
-              >
-                 <BookOpen className="w-4 h-4" /> READ SAMPLE
-              </button>
+              {/* Subtle sheen overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            </div>
 
-              <p className="text-gray-100 font-montserrat text-sm italic translate-y-4 group-hover:translate-y-0 transition-transform delay-150 max-w-[90%] leading-relaxed text-shadow-sm">
-                "{book.excerpt.substring(0, 100)}..."
+            <div className="flex-grow text-center">
+              <span className="text-red-600 text-[10px] font-bold uppercase tracking-[0.25em] mb-3 block">
+                {book.subtitle}
+              </span>
+              <h3 className="text-xl font-cinzel text-gray-100 mb-4 group-hover:text-yellow-500 transition-colors duration-300 leading-snug">
+                {book.title}
+              </h3>
+              <p className="text-sm text-gray-400 leading-relaxed font-light line-clamp-4">
+                {book.description}
               </p>
             </div>
-          </div>
-
-          {/* Title Below */}
-          <div className="text-center w-full">
-            <h3 className="text-2xl font-cinzel text-white mt-2 group-hover:text-gold transition-colors duration-300 tracking-wide drop-shadow-md">
-              {book.title}
-            </h3>
-            <span className="text-xs font-montserrat text-crimson tracking-[0.2em] uppercase mt-2 block font-bold">
-              {book.subtitle}
-            </span>
-            <p className="text-sm text-gray-300 mt-4 leading-7 font-montserrat opacity-90 px-2">
-              {book.description}
-            </p>
           </div>
         </div>
       ))}

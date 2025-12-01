@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { X, Feather, Bookmark, ExternalLink, BookOpen, ChevronRight, AlignLeft, Share2 } from 'lucide-react';
+import { X, ExternalLink, Share2, BookOpen } from 'lucide-react';
 import { Book as BookType } from '../types';
 
 interface GrimoireModalProps {
