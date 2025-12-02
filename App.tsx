@@ -36,8 +36,8 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-200 font-body selection:bg-red-900 selection:text-white overflow-x-hidden relative antialiased">
       
-      {/* Global Cinematic Grain Texture - Reduced Opacity to 0.02 */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.02] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
+      {/* Global Cinematic Grain Texture - Reduced Opacity to 0.015 for less noise */}
+      <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.015] mix-blend-overlay bg-[url('https://www.transparenttextures.com/patterns/noise.png')]"></div>
 
       {/* --- 1. HERO SECTION --- */}
       <Hero />
@@ -82,11 +82,11 @@ export default function App() {
       <AuthorNoteSection />
 
       {/* --- 10. FOOTER --- */}
-      <footer className="py-16 bg-black border-t border-white/10 text-sm text-gray-300 font-sans relative z-10">
+      <footer className="py-16 bg-black border-t border-white/10 text-sm text-gray-400 font-sans relative z-10">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="text-center md:text-left">
             <h4 className="text-yellow-500 font-fantasy text-lg mb-2 tracking-widest opacity-90">IMPERIAL X</h4>
-            <p className="font-normal text-gray-400">© 2025 ImperialX — All rights reserved.</p>
+            <p className="font-normal text-gray-500">© 2025 ImperialX — All rights reserved.</p>
           </div>
           
           <div className="flex gap-8">
