@@ -3,8 +3,12 @@ import { ChevronDown, Sparkles, ScrollText } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    // Trigger entrance animations after mount
+    setTimeout(() => setIsLoaded(true), 100);
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
@@ -28,12 +32,12 @@ export const Hero: React.FC = () => {
             className="absolute inset-0 bg-cover bg-center animate-slow-zoom"
             style={{ 
               backgroundImage: "url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5980?q=80&w=2072&auto=format&fit=crop')",
-              opacity: 0.6
+              opacity: 0.5
             }} 
          />
          {/* Gradient Overlay to darken */}
-         <div className="absolute inset-0 bg-gradient-to-b from-gray-950/80 via-gray-950/20 to-gray-950"></div>
-         <div className="absolute inset-0 bg-gradient-to-r from-gray-950/50 via-transparent to-gray-950/50"></div>
+         <div className="absolute inset-0 bg-gradient-to-b from-[#030005] via-[#030005]/40 to-[#030005]"></div>
+         <div className="absolute inset-0 bg-gradient-to-r from-[#030005] via-transparent to-[#030005]"></div>
       </div>
 
       {/* Foreground Content */}
@@ -42,33 +46,51 @@ export const Hero: React.FC = () => {
         style={{ transform: `translateY(${scrollY * 0.3}px)`, opacity: Math.max(0, 1 - scrollY / 600) }}
       >
         {/* Animated Reveal Header */}
-        <div className="mb-8 flex items-center justify-center space-x-4 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <div className="h-[1px] w-16 bg-yellow-500/50"></div>
-          <span className="text-yellow-400 font-cinzel tracking-[0.4em] text-xs font-bold uppercase">Imperial X Presents</span>
-          <div className="h-[1px] w-16 bg-yellow-500/50"></div>
+        <div 
+          className={`mb-8 flex items-center justify-center space-x-4 transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          <div className="h-[1px] w-12 md:w-24 bg-gradient-to-r from-transparent to-gold"></div>
+          <span className="text-gold font-cinzel tracking-[0.3em] text-[10px] md:text-xs font-bold uppercase shadow-gold drop-shadow-md">
+            The ImperialX Trilogy
+          </span>
+          <div className="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-gold"></div>
         </div>
         
-        <h1 className="text-6xl md:text-9xl font-cinzel font-bold text-white drop-shadow-2xl tracking-wide opacity-0 animate-fade-in-up mb-6" style={{ animationDelay: '0.3s' }}>
-          VEILED REALM
-        </h1>
+        {/* Main Title - Dramatic Scale In */}
+        <div className="relative mb-8">
+          <h1 
+            className={`text-5xl md:text-8xl lg:text-9xl font-cinzel font-bold text-white tracking-widest transition-all duration-[1.5s] ease-out ${isLoaded ? 'opacity-100 scale-100 blur-0' : 'opacity-0 scale-125 blur-sm'}`}
+          >
+            VEILED <span className="text-transparent bg-clip-text bg-gradient-to-b from-red-600 to-red-900">REALM</span>
+          </h1>
+          {/* Glow Effect behind text */}
+          <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-red-900/20 blur-[80px] -z-10 transition-opacity duration-[2s] delay-500 ${isLoaded ? 'opacity-100' : 'opacity-0'}`} />
+        </div>
         
-        <p className="text-lg md:text-2xl text-gray-100 font-montserrat font-normal tracking-wide mb-10 max-w-3xl opacity-0 animate-fade-in-up drop-shadow-md leading-relaxed" style={{ animationDelay: '0.5s' }}>
-          A dark fantasy about truth, memory, and rebellion against the gods.
+        <p 
+          className={`text-lg md:text-2xl text-gray-200 font-montserrat font-normal tracking-wide mb-12 max-w-3xl leading-relaxed transition-all duration-1000 delay-500 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
+          A dark fantasy about <span className="text-white font-medium">truth</span>, <span className="text-white font-medium">memory</span>, and <span className="text-white font-medium">rebellion</span> against the gods.
         </p>
 
-        <div className="border-l-2 border-red-600 pl-6 py-2 max-w-xl mx-auto text-left bg-gradient-to-r from-gray-900/60 to-transparent backdrop-blur-sm opacity-0 animate-fade-in-up mb-12" style={{ animationDelay: '0.7s' }}>
-          <p className="italic text-gray-200 font-serif text-xl font-normal">
+        <div 
+           className={`border-l-2 border-red-600 pl-6 py-2 max-w-xl mx-auto text-left bg-gradient-to-r from-gray-900/60 to-transparent backdrop-blur-sm mb-14 transition-all duration-1000 delay-700 ${isLoaded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
+        >
+          <p className="italic text-gray-300 font-reading text-lg md:text-xl font-normal">
             “Every world ends twice — first in memory, then in belief.”
           </p>
         </div>
         
-        <div className="flex flex-col md:flex-row gap-6 opacity-0 animate-fade-in-up" style={{ animationDelay: '0.9s' }}>
+        {/* CTA Buttons */}
+        <div 
+          className={`flex flex-col md:flex-row gap-6 transition-all duration-1000 delay-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+        >
           <button 
             onClick={() => scrollToSection('books')}
-            className="group relative px-8 py-4 overflow-hidden bg-white/5 border border-white/10 text-gray-100 font-cinzel font-bold tracking-widest transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/20 backdrop-blur-sm"
+            className="group relative px-8 py-4 overflow-hidden bg-white/5 border border-white/10 text-gray-100 font-cinzel font-bold tracking-widest transition-all duration-300 hover:border-red-500/50 hover:bg-red-900/10 backdrop-blur-sm"
           >
             <div className="absolute top-0 -inset-full h-full w-1/2 z-5 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine" />
-            <span className="relative z-10 flex items-center gap-3">
+            <span className="relative z-10 flex items-center gap-3 text-xs md:text-sm">
               READ SAMPLE
               <ScrollText className="w-4 h-4 text-red-500" />
             </span>
@@ -76,19 +98,19 @@ export const Hero: React.FC = () => {
 
           <button 
             onClick={() => scrollToSection('newsletter')}
-            className="group relative px-8 py-4 overflow-hidden bg-red-700 text-white font-cinzel font-bold tracking-widest transition-all duration-300 hover:bg-red-600 shadow-lg hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
+            className="group relative px-8 py-4 overflow-hidden bg-red-800 text-white font-cinzel font-bold tracking-widest transition-all duration-300 hover:bg-red-700 shadow-lg hover:shadow-[0_0_20px_rgba(220,38,38,0.4)]"
           >
-            <span className="relative z-10 flex items-center gap-3">
+            <span className="relative z-10 flex items-center gap-3 text-xs md:text-sm">
               JOIN THE REALM
-              <Sparkles className="w-4 h-4 text-yellow-400" />
+              <Sparkles className="w-4 h-4 text-yellow-400 group-hover:rotate-12 transition-transform" />
             </span>
           </button>
         </div>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-400 z-20">
-        <ChevronDown className="w-6 h-6 opacity-80" />
+      <div className={`absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce text-gray-400 z-20 transition-opacity duration-1000 delay-[1500ms] ${isLoaded ? 'opacity-80' : 'opacity-0'}`}>
+        <ChevronDown className="w-6 h-6" />
       </div>
     </div>
   );
