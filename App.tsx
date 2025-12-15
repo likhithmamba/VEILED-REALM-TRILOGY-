@@ -121,7 +121,7 @@ export default function App() {
       {/* 0. CINEMATIC INTRO */}
       <IntroOverlay onComplete={() => setIntroFinished(true)} />
 
-      {/* 1. GLOBAL "LIVING VOID" ATMOSPHERE (Visible after intro starts) */}
+      {/* 1. GLOBAL "LIVING VOID" ATMOSPHERE (Visible behind intro) */}
       <div className="fixed inset-0 pointer-events-none z-0 bg-[#030005]">
          {/* Drifting Red/Gold Motes */}
          <div className="absolute inset-0 opacity-20 animate-pulse-slow bg-[radial-gradient(circle_at_20%_30%,_rgba(153,27,27,0.15)_0%,_transparent_40%)]" />
@@ -143,9 +143,11 @@ export default function App() {
       <ScrollToTopRune />
 
       {/* --- CONTENT LAYOUT --- */}
-      <div className={`relative z-10 transition-opacity duration-1000 ${introFinished ? 'opacity-100' : 'opacity-0'}`}>
+      {/* Removed the 'opacity-0' logic. The content is always rendered, but covered by IntroOverlay initially. */}
+      <div className="relative z-10">
         
-        <Hero />
+        {/* Pass introFinished to trigger the text slam animations only when the doors open */}
+        <Hero startAnimations={introFinished} />
 
         <MysticalDivider />
 

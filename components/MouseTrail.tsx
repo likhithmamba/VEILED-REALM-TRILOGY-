@@ -1,76 +1,108 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-interface Point {
+interface Particle {
   x: number;
   y: number;
-  id: number;
-  color: string;
   size: number;
+  color: string;
+  vx: number;
+  vy: number;
+  life: number;
+  maxLife: number;
 }
 
 export const MouseTrail: React.FC = () => {
-  const [points, setPoints] = useState<Point[]>([]);
-  const requestRef = useRef<number>(0);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const particles = useRef<Particle[]>([]);
+  const animationFrameId = useRef<number>(0);
+  const mouse = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
-    let frameId: number;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
+    // Handle Resize
+    const handleResize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    
+    // Initial Size
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    // Track Mouse
     const handleMouseMove = (e: MouseEvent) => {
-      // Create points frequently for a smooth trail
-      requestRef.current++;
-      if (requestRef.current % 2 !== 0) return;
-
-      const newPoint = {
-        x: e.pageX,
-        y: e.pageY,
-        id: Date.now(),
-        // Mix of Crimson Red and Deep Gold
-        color: Math.random() > 0.6 ? '#ca8a04' : '#ef4444',
-        size: Math.random() * 4 + 2 // Random size between 2px and 6px
-      };
-
-      setPoints(prev => [...prev.slice(-20), newPoint]); // Keep last 20 points
+      mouse.current.x = e.clientX;
+      mouse.current.y = e.clientY;
+      
+      // Add particles on move (Magic Dust)
+      for (let i = 0; i < 2; i++) {
+        particles.current.push({
+          x: mouse.current.x,
+          y: mouse.current.y,
+          size: Math.random() * 3 + 1,
+          color: Math.random() > 0.5 ? 'rgba(202, 138, 4,' : 'rgba(153, 27, 27,', // Gold or Crimson base
+          vx: (Math.random() - 0.5) * 1.5,
+          vy: (Math.random() - 0.5) * 1.5,
+          life: 1,
+          maxLife: Math.random() * 0.5 + 0.5
+        });
+      }
     };
-
     window.addEventListener('mousemove', handleMouseMove);
-    return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
-      cancelAnimationFrame(frameId);
-    };
-  }, []);
 
-  // Auto-cleanup old points to create "fading" tail effect
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPoints(prev => prev.filter(p => Date.now() - p.id < 500));
-    }, 50);
-    return () => clearInterval(interval);
+    // Animation Loop
+    const render = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Update and Draw Particles
+      for (let i = 0; i < particles.current.length; i++) {
+        const p = particles.current[i];
+        
+        // Physics
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= 0.02; // Fade rate
+
+        // Draw
+        if (p.life > 0) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+          ctx.fillStyle = `${p.color}${p.life})`;
+          ctx.fill();
+          
+          // Glow effect
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color === 'rgba(202, 138, 4,' ? '#ca8a04' : '#991b1b';
+        } else {
+          // Remove dead particles
+          particles.current.splice(i, 1);
+          i--;
+        }
+      }
+
+      ctx.shadowBlur = 0; // Reset shadow for performance
+      animationFrameId.current = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('mousemove', handleMouseMove);
+      cancelAnimationFrame(animationFrameId.current);
+    };
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[9999] overflow-hidden mix-blend-screen">
-      {points.map((point) => {
-        const age = Date.now() - point.id;
-        const opacity = 1 - age / 500;
-        
-        return (
-          <div
-            key={point.id}
-            className="absolute rounded-full blur-[1px]"
-            style={{
-              left: point.x,
-              top: point.y - window.scrollY,
-              width: `${point.size}px`,
-              height: `${point.size}px`,
-              backgroundColor: point.color,
-              opacity: opacity,
-              transform: `translate(-50%, -50%) scale(${opacity})`,
-              boxShadow: `0 0 ${point.size * 2}px ${point.color}`, // Glowing aura
-              transition: 'opacity 0.1s linear'
-            }}
-          />
-        );
-      })}
-    </div>
+    <canvas 
+      ref={canvasRef}
+      className="pointer-events-none fixed inset-0 z-[9999] mix-blend-screen"
+      style={{ touchAction: 'none' }}
+    />
   );
 };

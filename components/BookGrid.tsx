@@ -7,69 +7,97 @@ interface BookGridProps {
   onBookSelect: (book: Book) => void;
 }
 
-export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
-  const [visible, setVisible] = useState<number[]>([]);
-  const containerRef = useRef<HTMLDivElement>(null);
+// 3D Tilt Card Component
+const TiltCard = ({ children, onClick, className, delay }: { children: React.ReactNode, onClick: () => void, className?: string, delay: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute('data-index'));
-            setVisible((prev) => (prev.includes(index) ? prev : [...prev, index]));
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '50px' }
-    );
+    // Fade in animation
+    const timer = setTimeout(() => setIsVisible(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
 
-    const elements = containerRef.current?.querySelectorAll('.book-card');
-    elements?.forEach((el) => observer.observe(el));
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
 
-    return () => observer.disconnect();
-  }, []);
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = ((y - centerY) / centerY) * -10; // Max rotation deg
+    const rotateY = ((x - centerX) / centerX) * 10;
+
+    setRotation({ x: rotateX, y: rotateY });
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setRotation({ x: 0, y: 0 });
+  };
 
   return (
-    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 max-w-7xl mx-auto px-4">
+    <div 
+      className={`transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-24'}`}
+    >
+      <div 
+        ref={cardRef}
+        className={`relative h-full perspective-1000 ${className}`}
+        onMouseMove={(e) => { setIsHovered(true); handleMouseMove(e); }}
+        onMouseLeave={handleMouseLeave}
+        onClick={onClick}
+        style={{
+          transformStyle: 'preserve-3d',
+          transform: isHovered 
+            ? `perspective(1000px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg) scale3d(1.02, 1.02, 1.02)` 
+            : 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)',
+          transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out'
+        }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export const BookGrid: React.FC<BookGridProps> = ({ onBookSelect }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14 max-w-7xl mx-auto px-4 perspective-container">
       {BOOKS.map((book, idx) => (
-        <div 
-          key={book.id}
-          data-index={idx}
-          className={`book-card group relative flex flex-col transition-all duration-1000 ease-out transform ${
-            visible.includes(idx) 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 translate-y-24'
-          }`}
-          style={{ transitionDelay: `${idx * 150}ms` }}
+        <TiltCard 
+          key={book.id} 
+          delay={idx * 150}
+          onClick={() => onBookSelect(book)}
+          className="cursor-pointer"
         >
-          <div className="relative h-full flex flex-col p-8 rounded-sm border border-white/5 bg-white/[0.03] backdrop-blur-sm hover:bg-white/[0.06] hover:border-red-900/30 hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] transition-all duration-500 group-hover:-translate-y-2">
+          <div className="relative h-full flex flex-col p-8 rounded-sm border border-white/5 bg-white/[0.03] backdrop-blur-sm shadow-xl transition-colors duration-500 hover:bg-white/[0.06] hover:border-red-900/30 hover:shadow-[0_0_40px_rgba(153,27,27,0.15)] h-full">
             
-            {/* Cover Area - Clickable to open modal */}
-            <div 
-              className="relative w-full aspect-[2/3] mb-8 overflow-hidden rounded-sm shadow-2xl cursor-pointer group-hover:shadow-[0_0_25px_rgba(0,0,0,0.7)] transition-shadow duration-500"
-              onClick={() => onBookSelect(book)}
-            >
-              <BookCover book={book} className="w-full h-full transform group-hover:scale-105 transition-transform duration-700 ease-out" />
-              
-              {/* Subtle sheen overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+            {/* Glossy Sheen Effect */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-sm z-40" />
+
+            {/* Cover Area */}
+            <div className="relative w-full aspect-[2/3] mb-8 overflow-hidden rounded-sm shadow-2xl transition-shadow duration-500 transform-style-3d">
+              <BookCover book={book} className="w-full h-full" />
             </div>
 
-            <div className="flex-grow text-center">
-              <span className="text-red-500 text-[10px] font-bold uppercase tracking-[0.25em] mb-3 block">
+            <div className="flex-grow text-center transform-style-3d">
+              <span className="text-red-500 text-[10px] font-bold uppercase tracking-[0.25em] mb-3 block transform translate-z-10">
                 {book.subtitle}
               </span>
-              <h3 className="text-xl font-cinzel text-white mb-4 group-hover:text-yellow-400 transition-colors duration-300 leading-snug">
+              <h3 className="text-xl font-cinzel text-white mb-4 hover:text-yellow-400 transition-colors duration-300 leading-snug">
                 {book.title}
               </h3>
               <p className="text-sm text-gray-300 leading-relaxed font-normal line-clamp-4">
                 {book.description}
               </p>
             </div>
-            {/* BUTTON REMOVED AS REQUESTED */}
           </div>
-        </div>
+        </TiltCard>
       ))}
     </div>
   );
